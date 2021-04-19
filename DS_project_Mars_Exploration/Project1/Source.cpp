@@ -1,8 +1,8 @@
 #include<iostream>
-using name space std;
+using namespace std;
 
 int main()
 {
-cout <<"mars hello"<<endl;
+cout <<"hello mars"<<endl;
   return 0;
 }
