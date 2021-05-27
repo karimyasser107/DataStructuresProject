@@ -3,6 +3,6 @@ using namespace std;
 
 int main()
 {
-cout <<"hello mars"<<endl;
+cout <<"Marboha Ya Data"<<endl;
   return 0;
 }
