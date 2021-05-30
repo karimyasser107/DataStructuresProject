@@ -24,27 +24,6 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Kareem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\LinkedList.cpp">
-      <Filter>data_structures</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\LinkedQueue.cpp">
-      <Filter>data_structures</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\ListInterface.cpp">
-      <Filter>data_structures</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\Node.cpp">
-      <Filter>data_structures</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\PrecondViolatedExcep.cpp">
-      <Filter>data_structures</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\QueueInterface.cpp">
-      <Filter>data_structures</Filter>
-    </ClCompile>
     <ClCompile Include="Rovers.cpp">
       <Filter>Project_Classes</Filter>
     </ClCompile>
@@ -52,27 +31,6 @@
   <ItemGroup>
     <ClInclude Include="Header.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Kareem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\LinkedList.h">
-      <Filter>data_structures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\LinkedQueue.h">
-      <Filter>data_structures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\ListInterface.h">
-      <Filter>data_structures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\Node.h">
-      <Filter>data_structures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\PrecondViolatedExcep.h">
-      <Filter>data_structures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\QueueInterface.h">
-      <Filter>data_structures</Filter>
     </ClInclude>
     <ClInclude Include="Rovers.h">
       <Filter>Project_Classes</Filter>

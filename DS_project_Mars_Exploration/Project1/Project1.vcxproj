@@ -139,25 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\LinkedList.cpp" />
-    <ClCompile Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\LinkedQueue.cpp" />
-    <ClCompile Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\ListInterface.cpp" />
-    <ClCompile Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\Node.cpp" />
-    <ClCompile Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\PrecondViolatedExcep.cpp" />
-    <ClCompile Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\QueueInterface.cpp" />
-    <ClCompile Include="Kareem.cpp" />
     <ClCompile Include="Rovers.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\LinkedList.h" />
-    <ClInclude Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\LinkedQueue.h" />
-    <ClInclude Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\ListInterface.h" />
-    <ClInclude Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\Node.h" />
-    <ClInclude Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\PrecondViolatedExcep.h" />
-    <ClInclude Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\QueueInterface.h" />
     <ClInclude Include="Header.h" />
-    <ClInclude Include="Kareem.h" />
     <ClInclude Include="Rovers.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
