@@ -45,7 +45,7 @@
     <ClCompile Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\QueueInterface.cpp">
       <Filter>data_structures</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\Rovers.cpp">
+    <ClCompile Include="Rovers.cpp">
       <Filter>Project_Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,7 +74,7 @@
     <ClInclude Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\QueueInterface.h">
       <Filter>data_structures</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Spring 2021\DS_project\DS_project_Mars_Exploration\Project1\Rovers.h">
+    <ClInclude Include="Rovers.h">
       <Filter>Project_Classes</Filter>
     </ClInclude>
   </ItemGroup>
