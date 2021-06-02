@@ -67,6 +67,6 @@ Mars_Station::~Mars_Station()
 int main()
 {
 	Mars_Station M1;
-	//M1.Save_OutputFile();
+	/*M1.Save_OutputFile();*/
 	//M1.Read_InputFile();
 }
