@@ -19,16 +19,43 @@
     <Filter Include="Project_Classes">
       <UniqueIdentifier>{c5aa4fec-960b-4277-b204-75825b84ca25}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI_Class">
+      <UniqueIdentifier>{1672ac41-a5af-47ed-9e02-13ae2d1b6428}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mars_Station">
+      <UniqueIdentifier>{3b06dc2d-6beb-43c8-8d2a-06a9f0fc3d7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Rovers.cpp">
       <Filter>Project_Classes</Filter>
     </ClCompile>
     <ClCompile Include="Mission.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Class.cpp">
+      <Filter>UI_Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Mars_Station.cpp">
+      <Filter>Mars_Station</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>data_structures</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkedList.cpp">
+      <Filter>data_structures</Filter>
+    </ClCompile>
+    <ClCompile Include="ListInterface.cpp">
+      <Filter>data_structures</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkedQueue.cpp">
+      <Filter>data_structures</Filter>
+    </ClCompile>
+    <ClCompile Include="QueueInterface.cpp">
+      <Filter>data_structures</Filter>
+    </ClCompile>
+    <ClCompile Include="PrecondViolatedExcep.cpp">
+      <Filter>data_structures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -40,6 +67,30 @@
     </ClInclude>
     <ClInclude Include="Mission.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Class.h">
+      <Filter>UI_Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Mars_Station.h">
+      <Filter>Mars_Station</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>data_structures</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>data_structures</Filter>
+    </ClInclude>
+    <ClInclude Include="ListInterface.h">
+      <Filter>data_structures</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedQueue.h">
+      <Filter>data_structures</Filter>
+    </ClInclude>
+    <ClInclude Include="QueueInterface.h">
+      <Filter>data_structures</Filter>
+    </ClInclude>
+    <ClInclude Include="PrecondViolatedExcep.h">
+      <Filter>data_structures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

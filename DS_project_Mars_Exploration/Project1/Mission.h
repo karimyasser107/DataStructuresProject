@@ -78,22 +78,22 @@ inline void Mission<T>::setType(char c)
 	Type = c;
 }
 
-template<class T>
-inline char Mission<T>::getType()
-{
-	char P;   // polar
-	char E;   // emergency
-
-	if (Type == p)
-	{
-		return p;
-	}
-	if (Type==E)
-	{
-		return E;
-	}
-	
-}
+//template<class T>
+//inline char Mission<T>::getType()
+//{
+//	char P;   // polar
+//	char E;   // emergency
+//
+//	if (Type == p)
+//	{
+//		return p;
+//	}
+//	if (Type==E)
+//	{
+//		return E;
+//	}
+//	
+//}
 
 template<class T>
 inline void Mission<T>::setID(int id)

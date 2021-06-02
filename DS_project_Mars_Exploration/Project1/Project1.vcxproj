@@ -139,12 +139,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LinkedList.cpp" />
+    <ClCompile Include="LinkedQueue.cpp" />
+    <ClCompile Include="ListInterface.cpp" />
+    <ClCompile Include="Mars_Station.cpp" />
     <ClCompile Include="Mission.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="PrecondViolatedExcep.cpp" />
+    <ClCompile Include="QueueInterface.cpp" />
     <ClCompile Include="Rovers.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="UI_Class.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="LinkedQueue.h" />
+    <ClInclude Include="ListInterface.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="Mars_Station.h" />
+    <ClInclude Include="PrecondViolatedExcep.h" />
+    <ClInclude Include="QueueInterface.h" />
+    <ClInclude Include="UI_Class.h" />
     <ClInclude Include="Mission.h" />
     <ClInclude Include="Rovers.h" />
   </ItemGroup>
