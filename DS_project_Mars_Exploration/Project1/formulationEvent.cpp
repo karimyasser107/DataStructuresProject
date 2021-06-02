@@ -66,7 +66,7 @@ int formulationEvent::getSignificance()
 
 void formulationEvent::Execute(LinkedQueue<Mission*>&EmergQ, LinkedQueue<Mission*>&PolarQ)
 {
-	Mission* FM = new Mission ;
+	Mission* FM = new Mission() ;
 	FM->setFormulationDay(eventday);
 	FM->setID(missionID);
 	FM->setType(type);
