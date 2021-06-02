@@ -30,9 +30,6 @@
     <ClCompile Include="Rovers.cpp">
       <Filter>Project_Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Mission.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="UI_Class.cpp">
       <Filter>UI_Class</Filter>
     </ClCompile>
@@ -57,16 +54,13 @@
     <ClCompile Include="PrecondViolatedExcep.cpp">
       <Filter>data_structures</Filter>
     </ClCompile>
+    <ClCompile Include="Mission.cpp">
+      <Filter>Project_Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Rovers.h">
       <Filter>Project_Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Mission.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UI_Class.h">
       <Filter>UI_Class</Filter>
@@ -91,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="PrecondViolatedExcep.h">
       <Filter>data_structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Mission.h">
+      <Filter>Project_Classes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

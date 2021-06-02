@@ -68,7 +68,7 @@ inline Mission<T>::Mission()
 	NoOfInExecutionMission = 0;
 	NoOfCompletedMissions = 0;
 	NoOfMissionsBeforeCHECKUP = 0;
-	
+
 	NoOfAvailableRovers = 0;
 }
 
@@ -112,3 +112,4 @@ inline int Mission<T>::setMissinDuration(int d)
 {
 	MissionDuration = d;
 }
+
