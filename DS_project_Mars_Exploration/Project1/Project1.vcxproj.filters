@@ -57,6 +57,12 @@
     <ClCompile Include="Mission.cpp">
       <Filter>Project_Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="formulationEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Rovers.h">
@@ -88,6 +94,12 @@
     </ClInclude>
     <ClInclude Include="Mission.h">
       <Filter>Project_Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="formulationEvent.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

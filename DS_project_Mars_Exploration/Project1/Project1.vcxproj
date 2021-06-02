@@ -139,6 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="formulationEvent.cpp" />
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="LinkedQueue.cpp" />
     <ClCompile Include="ListInterface.cpp" />
@@ -151,6 +153,8 @@
     <ClCompile Include="UI_Class.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="formulationEvent.h" />
     <ClInclude Include="Mission.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedQueue.h" />

@@ -1,5 +1,4 @@
 #pragma once
-template <class T>
 class Mission
 {
 private:
@@ -37,18 +36,27 @@ private:
 public:
 
 	Mission();
+	void setFormulationDay(int FD);
+	int getFormulationDay();
+
 	void setType(char c);
 	char getType();
 
 	void setID(int id);
 	int getID();
 
-	int setMissinDuration(int d);
+	void setMissinDuration(int d);
+	int getMissionDuration();
+
+	void settargetLoction(int Tloc);
+	int getTargetLocation();
+
+	void setSignificance(int Sig);
+	int getSignificance();
 
 };
 
-template<class T>
-inline Mission<T>::Mission()
+inline Mission::Mission()
 {
 	state = 0;
 	NoOfWaitingDays = 0;
@@ -72,44 +80,65 @@ inline Mission<T>::Mission()
 	NoOfAvailableRovers = 0;
 }
 
-template<class T>
-inline void Mission<T>::setType(char c)
+void Mission::setFormulationDay(int FD)
+{
+	FormulationDay = FD;
+}
+
+int Mission::getFormulationDay()
+{
+	return FormulationDay;
+}
+
+
+inline void Mission::setType(char c)
 {
 	Type = c;
 }
 
-//template<class T>
-//inline char Mission<T>::getType()
-//{
-//	char P;   // polar
-//	char E;   // emergency
-//
-//	if (Type == p)
-//	{
-//		return p;
-//	}
-//	if (Type==E)
-//	{
-//		return E;
-//	}
-//	
-//}
+inline char Mission::getType()
+{
+	return Type;
+	
+}
 
-template<class T>
-inline void Mission<T>::setID(int id)
+inline void Mission::setID(int id)
 {
 	ID = id;
 }
 
-template<class T>
-inline int Mission<T>::getID()
+inline int Mission::getID()
 {
 	return ID;
 }
 
-template<class T>
-inline int Mission<T>::setMissinDuration(int d)
+inline void Mission::setMissinDuration(int d)
 {
 	MissionDuration = d;
+}
+
+int Mission::getMissionDuration()
+{
+	return MissionDuration;
+}
+
+void Mission::settargetLoction(int TLoc)
+{
+	TargetLocation = TLoc;
+}
+
+int Mission::getTargetLocation()
+{
+	return TargetLocation;
+}
+
+void Mission::setSignificance(int Sig)
+{
+	Significance = Sig;
+}
+
+int Mission::getSignificance()
+{
+	return Significance;
 }
 
