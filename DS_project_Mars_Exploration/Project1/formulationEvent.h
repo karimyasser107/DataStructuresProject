@@ -1,7 +1,6 @@
 #pragma once
 #include "Event.h"
 #include"LinkedQueue.h"
-#include"Mission.h"
 class formulationEvent : public Event
 {
 private:

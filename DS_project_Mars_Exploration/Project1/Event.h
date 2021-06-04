@@ -1,4 +1,6 @@
 #pragma once
+#include"LinkedQueue.h"
+#include"Mission.h"
 class Event
 {
 private:
@@ -15,6 +17,6 @@ public:
 
 	int virtual getMissionID()=0;
 
-	void virtual Execute() =0;
+	void virtual Execute(LinkedQueue<Mission*>& EmergQ, LinkedQueue<Mission*>& PolarQ) =0;
 };
 
