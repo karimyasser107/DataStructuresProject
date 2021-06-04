@@ -51,11 +51,11 @@
     <ClCompile Include="formulationEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Node_Q.cpp">
-      <Filter>data_structures</Filter>
+    <ClCompile Include="Queue.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Node.cpp">
-      <Filter>data_structures</Filter>
+    <ClCompile Include="Nodo.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,11 +83,11 @@
     <ClInclude Include="formulationEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Node_Q.h">
-      <Filter>data_structures</Filter>
+    <ClInclude Include="Queue.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>data_structures</Filter>
+    <ClInclude Include="Nodo.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
