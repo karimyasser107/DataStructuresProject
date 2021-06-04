@@ -38,7 +38,7 @@ inline Rovers::Rovers()
 	startofmissionday = 0;
 	NoOfMissionsNow = 0;
 	state = 0;
-	misionDuration = 2 * (TLOC / speed) + MDUR;
+	/*misionDuration = 2 * (TLOC / speed) + MDUR;*/
 }
 
 inline void Rovers::setType(char S)

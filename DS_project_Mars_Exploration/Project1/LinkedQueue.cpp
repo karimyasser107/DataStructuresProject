@@ -6,7 +6,7 @@ The constructor of the Queue class.
 
 */
 template <typename T>
-LinkedQueue<T>::LinkedQueue()
+inline LinkedQueue<T>::LinkedQueue()
 {
 	backPtr = nullptr;
 	frontPtr = nullptr;
@@ -21,7 +21,7 @@ Input: None.
 Output: True if the queue is empty; otherwise false.
 */
 template <typename T>
-bool LinkedQueue<T>::isEmpty() const
+inline bool LinkedQueue<T>::isEmpty() const
 {
 	return (frontPtr == nullptr);
 }
@@ -54,7 +54,7 @@ Input: None.
 Output: True if the operation is successful; otherwise false.
 */
 template <typename T>
-bool LinkedQueue<T>::dequeue(T& frntEntry)
+inline bool LinkedQueue<T>::dequeue(T& frntEntry)
 {
 	if (isEmpty())
 		return false;
@@ -81,7 +81,7 @@ Input: None.
 Output: The front of the queue.
 */
 template <typename T>
-bool LinkedQueue<T>::peek(T& frntEntry) const
+inline bool LinkedQueue<T>::peek(T& frntEntry) const
 {
 	if (isEmpty())
 		return false;
@@ -96,7 +96,7 @@ Function: destructor
 removes all nodes from the queue by dequeuing them
 */
 template <typename T>
-LinkedQueue<T>::~LinkedQueue()
+inline LinkedQueue<T>::~LinkedQueue()
 {
 	T temp;
 
@@ -113,7 +113,7 @@ Input: LinkedQueue<T>: The Queue to be copied
 Output: none
 */
 template <typename T>
-LinkedQueue<T>::LinkedQueue(const LinkedQueue<T>& LQ)
+inline LinkedQueue<T>::LinkedQueue(const LinkedQueue<T>& LQ)
 {
 	Node_Q<T>* Node_QPtr = LQ.frontPtr;
 	if (!Node_QPtr) //LQ is empty
@@ -138,7 +138,7 @@ LinkedQueue<T>::LinkedQueue(const LinkedQueue<T>& LQ)
 }
 
 template<typename T>
-void LinkedQueue<T>::print() const
+inline void LinkedQueue<T>::print() const
 {
 	Node_Q<T>* ptr = frontPtr;
 	while (ptr)
@@ -147,4 +147,9 @@ void LinkedQueue<T>::print() const
 		ptr = ptr->getNext();
 	}
 	cout << endl;
+}
+int main()
+{
+	LinkedQueue<int>H;
+	Node_Q<int>* T = new Node_Q<int>(3);
 }

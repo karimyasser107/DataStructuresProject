@@ -3,17 +3,17 @@
 using namespace std;
 
 template < typename T>
-LinkedList<T>::LinkedList()
+inline LinkedList<T>::LinkedList()
 {
 	Head = nullptr;
 }
 template < typename T>
-LinkedList<T>::~LinkedList()
+inline LinkedList<T>::~LinkedList()
 {
 	DeleteAll();
 }
 template < typename T>
-Node<T>* LinkedList<T>::getHead()
+inline Node<T>* LinkedList<T>::getHead()
 {
 	return Head;
 }
@@ -21,7 +21,7 @@ Node<T>* LinkedList<T>::getHead()
 // DON'T CHANGE ANYTHING INSIDE THIS FUNCTION *********
 // BECAUSE THE AUTOMATIC JUDGE COMPARES FOR THIS FORMAT
 template < typename T>
-void LinkedList<T>::DeleteNode(Node<T>* Doll)
+inline void LinkedList<T>::DeleteNode(Node<T>* Doll)
 {
 	if (Doll == Head)
 	{
@@ -46,7 +46,7 @@ void LinkedList<T>::DeleteNode(Node<T>* Doll)
 	}
 }
 template < typename T>
-void LinkedList<T>::PrintList()	const
+inline void LinkedList<T>::PrintList()	const
 {
 	Node<T>* p = Head;
 	while (p)
@@ -59,7 +59,7 @@ void LinkedList<T>::PrintList()	const
 
 // DO NOT CHANGE ANYTHING IN THIS FUNCTION *********
 template < typename T>
-void LinkedList<T>::ReadList()
+inline void LinkedList<T>::ReadList()
 {
 	int val;
 	cin >> val;
@@ -72,7 +72,7 @@ void LinkedList<T>::ReadList()
 
 // you should NOT change this function
 template < typename T>
-void LinkedList<T>::InsertEnd(const T& data)
+inline void LinkedList<T>::InsertEnd(const T& data)
 {
 	Node<T>* R = new Node<T>(data);
 	if (!Head)
@@ -86,7 +86,7 @@ void LinkedList<T>::InsertEnd(const T& data)
 	p->setNext(R);
 }
 template < typename T>
-void LinkedList<T>::DeleteAll()
+inline void LinkedList<T>::DeleteAll()
 {
 	Node<T>* P = Head;
 	while (Head)
