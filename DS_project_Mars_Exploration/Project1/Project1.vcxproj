@@ -147,7 +147,6 @@
     <ClCompile Include="LinkedQueue.cpp" />
     <ClCompile Include="Mars_Station.cpp" />
     <ClCompile Include="Nodo.cpp" />
-    <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Rovers.cpp" />
     <ClCompile Include="Mission.cpp" />
     <ClCompile Include="UI_Class.cpp" />
@@ -160,7 +159,6 @@
     <ClInclude Include="LinkedQueue.h" />
     <ClInclude Include="Mars_Station.h" />
     <ClInclude Include="Nodo.h" />
-    <ClInclude Include="Queue.h" />
     <ClInclude Include="UI_Class.h" />
     <ClInclude Include="Rovers.h" />
   </ItemGroup>

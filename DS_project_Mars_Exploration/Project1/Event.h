@@ -9,14 +9,14 @@ private:
 public:
 	Event();
 
-	void virtual set_EventDay(int ED)=0;
+	void virtual set_EventDay(int ED);
 
-	void virtual set_MissionID(int ID)=0;
+	void virtual set_MissionID(int ID);
 
-	int virtual get_EventDay()=0;
+	int virtual get_EventDay();
 
-	int virtual get_MissionID()=0;
+	int virtual get_MissionID();
 
-	void virtual Execute(LinkedQueue<Mission*>& EmergQ, LinkedQueue<Mission*>& PolarQ) =0;
+	void virtual Execute(LinkedQueue<Mission>& EmergQ, LinkedQueue<Mission>& PolarQ) =0;
 };
 

@@ -76,7 +76,7 @@ inline bool LinkedQueue<T>::peek(T& frntEntry) const
 	if (isEmpty())
 		return false;
 
-	frntEntry = frontPtr->getItem();
+	frntEntry = frontPtr->getitem();
 	return true;
 }
 
@@ -86,8 +86,8 @@ inline void LinkedQueue<T>::print() const
 	Nodo<T>* ptr = frontPtr;
 	while (ptr)
 	{
-		cout << ptr->getItem() << " ";
-		ptr = ptr->getNext();
+		cout << ptr->getitem() << " ";
+		ptr = ptr->getnext();
 	}
 	cout << endl;
 }
@@ -112,17 +112,17 @@ inline LinkedQueue<T>::LinkedQueue(const LinkedQueue<T>& LQ)
 	}
 
 	//insert the first node
-	Nodo<T>* ptr = new Nodo<T>(Node_QPtr->getItem());
+	Nodo<T>* ptr = new Nodo<T>(Node_QPtr->getitem());
 	frontPtr = backPtr = ptr;
-	Node_QPtr = Node_QPtr->getNext();
+	Node_QPtr = Node_QPtr->getnext();
 
 	//insert remaining nodes
 	while (Node_QPtr)
 	{
-		Nodo<T>* ptr = new Nodo<T>(Node_QPtr->getItem());
-		backPtr->setNext(ptr);
+		Nodo<T>* ptr = new Nodo<T>(Node_QPtr->getitem());
+		backPtr->setnext(ptr);
 		backPtr = ptr;
-		Node_QPtr = Node_QPtr->getNext();
+		Node_QPtr = Node_QPtr->getnext();
 	}
 }
 

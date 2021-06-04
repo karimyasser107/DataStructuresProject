@@ -6,12 +6,12 @@ class Nodo
 	Nodo<T>* next;
 public:
 	Nodo();
-	Nodo(T& X);
-	Nodo(Nodo<T>* nextnode, T& X);
+	Nodo(const T& X);
+	Nodo(Nodo<T>* nextnode,const T& X);
 	void setnext(Nodo<T>*nextnode);
 	Nodo<T>* getnext();
 	T getitem();
-	void setitem(T& X);
+	void setitem(const T& X);
 };
 
 template<typename T>
@@ -22,14 +22,14 @@ inline Nodo<T>::Nodo()
 
 
 template<typename T>
-inline Nodo<T>::Nodo(T& X)
+inline Nodo<T>::Nodo(const T& X)
 {
 	item = X;
 	next = nullptr;
 }
 
 template<typename T>
-inline Nodo<T>::Nodo(Nodo<T>* nextnode, T& X)
+inline Nodo<T>::Nodo(Nodo<T>* nextnode,const T& X)
 {
 	item = X;
 	next = nextnode;
@@ -54,7 +54,7 @@ inline T Nodo<T>::getitem()
 }
 
 template<typename T>
-inline void Nodo<T>::setitem(T& X)
+inline void Nodo<T>::setitem(const T& X)
 {
 	item = X;
 }

@@ -4,62 +4,44 @@ formulationEvent::formulationEvent()
 {
 }
 
-void formulationEvent::set_EventDay(int ED)
-{
-	eventday = ED;
-}
 
-int formulationEvent::get_EventDay()
-{
-	return eventday;
-}
 
-void formulationEvent::set_MissionID(int ID)
-{
-	missionID = ID;
-}
-
-int formulationEvent::get_MissionID()
-{
-	return missionID;
-}
-
-void formulationEvent::setType(char T)
+void formulationEvent::set_Type(char T)
 {
 	type = T;
 }
 
-int formulationEvent::getType()
+int formulationEvent::get_Type()
 {
 	return type;
 }
 
-void formulationEvent::setTargetLocation(int TLoc)
+void formulationEvent::set_TargetLocation(int TLoc)
 {
 	targetLocation = TLoc;
 }
 
-int formulationEvent::getTargetLocation()
+int formulationEvent::get_TargetLocation()
 {
 	return targetLocation;
 }
 
-void formulationEvent::setMissionDuration(int MDur)
+void formulationEvent::set_MissionDuration(int MDur)
 {
 	missionDuration = MDur;
 }
 
-int formulationEvent::getMissionDuration()
+int formulationEvent::get_MissionDuration()
 {
 	return missionDuration;
 }
 
-void formulationEvent::setSignificance(int Sig)
+void formulationEvent::set_Significance(int Sig)
 {
 	significance = Sig;
 }
 
-int formulationEvent::getSignificance()
+int formulationEvent::get_Significance()
 {
 	return significance;
 }
@@ -67,8 +49,8 @@ int formulationEvent::getSignificance()
 void formulationEvent::Execute(LinkedQueue<Mission>&EmergQ, LinkedQueue<Mission>&PolarQ)
 {
 	Mission* FM = new Mission() ;
-	FM->setFormulationDay(eventday);
-	FM->setID(missionID);
+	FM->setFormulationDay(get_EventDay());
+	FM->setID(get_EventDay());
 	FM->setType(type);
 	FM->setMissinDuration(missionDuration);
 	FM->settargetLoction(targetLocation);

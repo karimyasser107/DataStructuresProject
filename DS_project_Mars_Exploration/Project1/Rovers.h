@@ -20,6 +20,7 @@ public:
 	void setType(char S);
 	char getType();
 	void setSpeed(int x);
+	//int get__Speed();
 	void setState(int x);
 	int getState();
 	void setCheckupDuration(int d);
@@ -56,6 +57,11 @@ inline void Rovers::setSpeed(int x)
 {
 	speed = x;
 }
+
+//int Rovers::get__Speed()
+//{
+//	return speed;
+//}
 
 inline void Rovers::setState(int x)
 {

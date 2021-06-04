@@ -102,7 +102,7 @@ inline void LinkedList<T>::ReadList()
 
 // you should NOT change this function
 template < typename T>
-inline void LinkedList<T>::InsertEnd( T data)
+inline void LinkedList<T>::InsertEnd( T  data)
 {
 	Nodo<T>* R = new Nodo<T>(data);
 	if (!Head)
