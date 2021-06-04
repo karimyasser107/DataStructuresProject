@@ -26,7 +26,7 @@ public:
 	int getMissionDuration();
 	int getSignificance();
 
-	void Execute(LinkedQueue<Mission*>&EmergQ, LinkedQueue<Mission*>&PolarQ);
+	void Execute(LinkedQueue<Mission>&EmergQ, LinkedQueue<Mission>&PolarQ);
 
 };
 

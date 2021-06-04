@@ -1,5 +1,4 @@
 #pragma once
-template <class T>
 class Rovers
 {
 private:
@@ -19,18 +18,21 @@ private:
 public:
 	Rovers();
 	void setType(char S);
+	char getType();
 	void setSpeed(int x);
+	void setState(int x);
+	int getState();
 	void setCheckupDuration(int d);
 	void setID(int x);
 	int getID();
 	void AssignRover();
 	bool putinchecko();
-	bool getfromchecko();
-	bool finishmission();
+	bool getfromchecko(int x);
+	bool finishmission(int Day);
 };
 
-template<class T>
-inline Rovers<T>::Rovers()
+
+inline Rovers::Rovers()
 {
 	startofcheckupday = 0;
 	startofmissionday = 0;
@@ -39,45 +41,57 @@ inline Rovers<T>::Rovers()
 	misionDuration = 2 * (TLOC / speed) + MDUR;
 }
 
-template<class T>
-inline void Rovers<T>::setType(char S)
+inline void Rovers::setType(char S)
 {
 	Type = S;
 }
 
-template<class T>
-inline void Rovers<T>::setSpeed(int x)
+inline char Rovers::getType()
+{
+	return Type;
+}
+
+
+inline void Rovers::setSpeed(int x)
 {
 	speed = x;
 }
 
-template<class T>
-inline void Rovers<T>::setCheckupDuration(int d)
+inline void Rovers::setState(int x)
+{
+	state = x;
+}
+
+inline int Rovers::getState()
+{
+	return state;
+}
+
+
+inline void Rovers::setCheckupDuration(int d)
 {
 	checkupDuration = d;
 }
 
-template<class T>
-inline void Rovers<T>::setID(int x)
+inline void Rovers::setID(int x)
 {
 	ID = x;
 }
 
-template<class T>
-inline int Rovers<T>::getID()
+inline int Rovers::getID()
 {
 	return ID;
 }
 
-template<class T>
-inline void Rovers<T>::AssignRover()
+
+inline void Rovers::AssignRover()
 {
 	startofmissionday = CurrentDay;
 	state = 1;
 }
 
-template<class T>
-inline bool Rovers<T>::putinchecko()
+
+inline bool Rovers::putinchecko()
 {
 	if (NoOfMissionsNow == NoOfMissionsMax)
 	{
@@ -91,10 +105,9 @@ inline bool Rovers<T>::putinchecko()
 	}
 }
 
-template<class T>
-inline bool Rovers<T>::getfromchecko()
+inline bool Rovers::getfromchecko(int x)
 {
-	if (CurrentDay - startofcheckupday == checkupDuration)
+	if (x - startofcheckupday == checkupDuration)
 	{
 		state = 0;
 		return true;
@@ -103,10 +116,10 @@ inline bool Rovers<T>::getfromchecko()
 		return false;
 }
 
-template<class T>
-inline bool Rovers<T>::finishmission()
+
+inline bool Rovers::finishmission(int Day)
 {
-	if (CurrentDay - startofmissionday == misionDuration)
+	if (Day - startofmissionday == misionDuration)
 	{
 		NoOfMissionsNow++;
 		putinchecko();

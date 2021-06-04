@@ -1,41 +1,100 @@
-/** ADT list: Link-based implementation.
- @file LinkedList.h */
-#ifndef _LINKED_LIST 
-#define _LINKED_LIST 
-#include "ListInterface.h" 
-#include "Node.h" 
-#include "PrecondViolatedExcep.h" 
-template< class ItemType>
-class LinkedList : public ListInterface<ItemType>
+#include"Node.h"
+#include<iostream>
+using namespace std;
+template <typename T>
+class LinkedList
 {
 private:
-	Node<ItemType>* headPtr; // Pointer to first node in the chain 
-	// (contains the first entry in the list) 
-	int itemCount; // Current count of list items
-	// Locates a specified node in a linked list. 
-	// @pre position is the number of the desired node; 
-	// position >= 1 and position <= itemCount. 
-	// @post The node is found and a pointer to it is returned. 
-// @param position The number of the node to locate. 
-	// @return A pointer to the node at the given position. 
-	Node<ItemType>* getNodeAt(int position) const;
-public:
-	LinkedList();
-	LinkedList(const LinkedList<ItemType>& aList);
-	virtual ~LinkedList();
-	bool isEmpty() const;
-	int getLength() const;
-	bool insert(int newPosition, const ItemType& newEntry);
-	bool remove(int position);
-	void clear();
-	/** @throw PrecondViolatedExcep if position < 1 or
-	 position > getLength(). */
-	ItemType getEntry(int position) const throw(PrecondViolatedExcep);
-	/** @throw PrecondViolatedExcep if position < 1 or
-	 position > getLength(). */
-	void setEntry(int position, const ItemType& newEntry)
-		throw(PrecondViolatedExcep);
-}; // end LinkedList 
-//#include "LinkedList.cpp" 
-#endif
+	Node<T>* Head;
 
+public:
+
+	LinkedList()
+	{
+		Head = nullptr;
+	}
+
+	~LinkedList()
+	{
+		DeleteAll();
+	}
+	Node* getHead()
+	{
+		return Head;
+	}
+	// Prints the linked list in the required format
+	// DON'T CHANGE ANYTHING INSIDE THIS FUNCTION *********
+	// BECAUSE THE AUTOMATIC JUDGE COMPARES FOR THIS FORMAT
+	void DeleteNode(Node*Doll)
+	{
+		if (Doll == Head)
+		{
+			Head = Head->getNext();
+			Doll->setNext(0);
+			delete(Doll);
+			Doll = Head;
+		}
+		else
+		{
+			Node<T>* Toll = Head;
+			while (Toll->getNext() != Doll)
+				Toll = Toll->getNext();
+			if (Doll->getNext() == NULL)
+				Toll->setNext(0);
+			else
+			{
+				Toll->setNext(Doll->getNext());
+			}
+			delete(Doll);
+			Doll = Toll;
+		}
+	}
+	void PrintList()	const
+	{
+		Node<T>* p = Head;
+		while (p)
+		{
+			cout << p->getItem() << " ";
+			p = p->getNext();
+		}
+		cout << endl;
+	}
+
+	// DO NOT CHANGE ANYTHING IN THIS FUNCTION *********
+	void ReadList()
+	{
+		int val;
+		cin >> val;
+		while (val != -1)
+		{
+			this->InsertEnd(val);
+			cin >> val;
+		}
+	}
+
+	// you should NOT change this function
+	void InsertEnd(const T& data)
+	{
+		Node<T>* R = new Node<T>(data);
+		if (!Head)
+		{
+			Head = R;
+			return;
+		}
+		Node<T>* p = Head;
+		while (p->getNext())
+			p = p->getNext();
+		p->setNext(R);
+	}
+
+	void DeleteAll()
+	{
+		Node<T>* P = Head;
+		while (Head)
+		{
+			P = Head->getNext();
+			delete Head;
+			Head = P;
+		}
+	}
+};

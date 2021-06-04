@@ -54,6 +54,7 @@ public:
 	void setSignificance(int Sig);
 	int getSignificance();
 
+	bool finishmission();
 };
 
 inline Mission::Mission()
@@ -140,5 +141,16 @@ inline void Mission::setSignificance(int Sig)
 inline int Mission::getSignificance()
 {
 	return Significance;
+}
+
+inline bool Mission::finishmission()
+{
+	if (currentDay == CompletionDay)
+	{
+		state = 1;
+		return true;
+	}
+	else
+		return false;
 }
 
