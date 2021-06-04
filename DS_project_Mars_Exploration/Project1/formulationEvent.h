@@ -12,20 +12,20 @@ private:
 	int significance;
 public:
 	formulationEvent();
-	void setEventDay(int ED);
-    void setMissionID(int ID);
+	void set_EventDay(int ED);
+    void set_MissionID(int ID);
 	void setType(char T);
 	void setTargetLocation(int TLoc);
 	void setMissionDuration(int MDur);
 	void setSignificance(int Sig);
-	int  getEventDay();
-	int getMissionID();
+	int  get_EventDay();
+	int get_MissionID();
 	int getType();
 	int getTargetLocation();
 	int getMissionDuration();
 	int getSignificance();
 
-	void Execute(LinkedQueue<Mission>&EmergQ, LinkedQueue<Mission>&PolarQ);
+	void Execute(LinkedQueue<Mission*>&EmergQ, LinkedQueue<Mission*>&PolarQ);
 
 };
 

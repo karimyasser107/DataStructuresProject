@@ -36,22 +36,10 @@
     <ClCompile Include="Mars_Station.cpp">
       <Filter>Mars_Station</Filter>
     </ClCompile>
-    <ClCompile Include="Node.cpp">
-      <Filter>data_structures</Filter>
-    </ClCompile>
     <ClCompile Include="LinkedList.cpp">
       <Filter>data_structures</Filter>
     </ClCompile>
-    <ClCompile Include="ListInterface.cpp">
-      <Filter>data_structures</Filter>
-    </ClCompile>
     <ClCompile Include="LinkedQueue.cpp">
-      <Filter>data_structures</Filter>
-    </ClCompile>
-    <ClCompile Include="QueueInterface.cpp">
-      <Filter>data_structures</Filter>
-    </ClCompile>
-    <ClCompile Include="PrecondViolatedExcep.cpp">
       <Filter>data_structures</Filter>
     </ClCompile>
     <ClCompile Include="Mission.cpp">
@@ -62,6 +50,12 @@
     </ClCompile>
     <ClCompile Include="formulationEvent.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Node_Q.cpp">
+      <Filter>data_structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>data_structures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,22 +68,10 @@
     <ClInclude Include="Mars_Station.h">
       <Filter>Mars_Station</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>data_structures</Filter>
-    </ClInclude>
     <ClInclude Include="LinkedList.h">
       <Filter>data_structures</Filter>
     </ClInclude>
-    <ClInclude Include="ListInterface.h">
-      <Filter>data_structures</Filter>
-    </ClInclude>
     <ClInclude Include="LinkedQueue.h">
-      <Filter>data_structures</Filter>
-    </ClInclude>
-    <ClInclude Include="QueueInterface.h">
-      <Filter>data_structures</Filter>
-    </ClInclude>
-    <ClInclude Include="PrecondViolatedExcep.h">
       <Filter>data_structures</Filter>
     </ClInclude>
     <ClInclude Include="Mission.h">
@@ -100,6 +82,12 @@
     </ClInclude>
     <ClInclude Include="formulationEvent.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Node_Q.h">
+      <Filter>data_structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>data_structures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,22 +4,22 @@ formulationEvent::formulationEvent()
 {
 }
 
-void formulationEvent::setEventDay(int ED)
+void formulationEvent::set_EventDay(int ED)
 {
 	eventday = ED;
 }
 
-int formulationEvent::getEventDay()
+int formulationEvent::get_EventDay()
 {
 	return eventday;
 }
 
-void formulationEvent::setMissionID(int ID)
+void formulationEvent::set_MissionID(int ID)
 {
 	missionID = ID;
 }
 
-int formulationEvent::getMissionID()
+int formulationEvent::get_MissionID()
 {
 	return missionID;
 }
@@ -64,7 +64,7 @@ int formulationEvent::getSignificance()
 	return significance;
 }
 
-void formulationEvent::Execute(LinkedQueue<Mission>&EmergQ, LinkedQueue<Mission>&PolarQ)
+void formulationEvent::Execute(LinkedQueue<Mission*>&EmergQ, LinkedQueue<Mission*>&PolarQ)
 {
 	Mission* FM = new Mission() ;
 	FM->setFormulationDay(eventday);
@@ -75,9 +75,9 @@ void formulationEvent::Execute(LinkedQueue<Mission>&EmergQ, LinkedQueue<Mission>
 	FM->setSignificance(significance);
 
 	if (type == 'E')
-		EmergQ.enqueue(*FM);
+		EmergQ.enqueue(FM);
 
 	if (type == 'P')
-		PolarQ.enqueue(*FM);
+		PolarQ.enqueue(FM);
 
 }

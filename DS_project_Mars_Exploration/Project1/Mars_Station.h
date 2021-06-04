@@ -3,11 +3,10 @@
 #include"Event.h"
 #include"LinkedList.h"
 #include"LinkedQueue.h"
-
 #include"Mission.h"
 #include"Rovers.h"
-#include"Node.h"
-#include<queue>
+//#include"Node.h"
+//#include<queue>
 
 class Mars_Station
 {
@@ -27,9 +26,9 @@ public:
 	LinkedList<Mission>ExcM;
 	LinkedQueue<Mission>CompP;
 	LinkedQueue<Mission>CompEm;
-	priority_queue<Mission>waitingEm;
+	//priority_queue<Mission>waitingEm;
 	LinkedQueue<Mission>waitingPola;
-	Mars_Station(LinkedList<Event>X);
+	//Mars_Station(LinkedList<Event>X);
 	//read input file function
 
 	void Read_InputFile();

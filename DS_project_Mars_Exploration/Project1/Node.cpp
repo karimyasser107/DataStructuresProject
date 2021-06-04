@@ -1,35 +1,35 @@
-#include "Node.h"
-template< class ItemType>
-Node<ItemType>::Node() : next(nullptr)
+#include"Node.h"
+#include<iostream>
+using namespace std;
+template < typename T>
+Node<T>::Node()
 {
-} // end default constructor 
-template<class ItemType>
-Node<ItemType>::Node(const ItemType& anItem) : item(anItem), next(nullptr)
-{
+	next = nullptr;
 }
+template < typename T>
+Node<T>::Node(T newItem)
+{
+	item = newItem;
+	next = nullptr;
 
-template< class ItemType>
-Node<ItemType>::Node(const ItemType& anItem, Node<ItemType>* nextNodePtr) :
-	item(anItem), next(nextNodePtr)
+}
+template < typename T>
+void Node<T>::setItem(T newItem)
 {
-} // end constructor 
-template< class ItemType>
-void Node<ItemType>::setItem(const ItemType& anItem)
-{
-	item = anItem;
-} // end setItem 
-template< class ItemType>
-void Node<ItemType>::setNext(Node<ItemType>* nextNodePtr)
+	item = newItem;
+}
+template < typename T>
+void Node<T>::setNext(Node<T>* nextNodePtr)
 {
 	next = nextNodePtr;
-} // end setNext 
-template< class ItemType>
-ItemType Node<ItemType>::getItem() const
+}
+template < typename T>
+T Node<T>::getItem() const
 {
 	return item;
-} // end getItem 
-template< class ItemType>
-Node<ItemType>* Node<ItemType>::getNext() const
+}
+template < typename T>
+Node<T>* Node<T>::getNext() const
 {
 	return next;
-} // end getNext 
+}

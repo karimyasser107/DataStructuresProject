@@ -124,4 +124,5 @@ inline bool Rovers::finishmission(int Day)
 		NoOfMissionsNow++;
 		putinchecko();
 	}
+	return false;
 }

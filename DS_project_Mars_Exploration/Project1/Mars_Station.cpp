@@ -4,9 +4,10 @@
 using namespace std;
 
 //constructor
-//Mars_Station::Mars_Station()	
-//{
-//}
+Mars_Station::Mars_Station()	
+{
+
+}
 
 void Mars_Station::Read_InputFile()
 {
@@ -117,18 +118,18 @@ void Mars_Station::checkinMissinExcec(int Day)
 void Mars_Station::EventsinDay(int Day)
 {
 	Node<Event>* EVC = EVEVE->getHead();
-	if()
+	//if()
 }
 
 void Mars_Station::lookforEmergMissio()
 {
-	if (!EmR.isEmpty()&&!waitingEm.empty())
+	/*if (!EmR.isEmpty()&&!waitingEm.empty())
 	{
 		Mission X = waitingEm.top();
 		Rovers Y; 
 		EmR.dequeue(Y);
 		
-	}
+	}*/
 }
 
 void Mars_Station::checkinCheckup(int Day)
