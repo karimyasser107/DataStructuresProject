@@ -2,11 +2,12 @@
 #include"UI_Class.h"
 #include <fstream>
 using namespace std;
+
 //constructor
-Mars_Station::Mars_Station()
-{
-	//Read_InputFile();
-}
+//Mars_Station::Mars_Station()	
+//{
+//}
+
 void Mars_Station::Read_InputFile()
 {
 	ifstream inputFile;
@@ -59,13 +60,106 @@ void Mars_Station::Save_OutputFile()
 
 }
 
+
+
+void Mars_Station::checkinExcec(int Day)
+{
+	Node<Rovers>* RR = CHX.getHead();
+	while (RR)
+	{
+		if (RR->getItem().finishmission(Day))
+		{
+			if (RR->getItem().putinchecko())
+			{
+				RR->getItem().putinchecko();
+				CHR.InsertEnd(RR->getItem());
+				CHX.DeleteNode(RR);
+			}
+			else
+			{
+				if (RR->getItem().getType() == 'P')
+					PolR.enqueue(RR->getItem());
+				else
+					EmR.enqueue(RR->getItem());
+				CHX.DeleteNode(RR);
+			}
+		}
+		else
+		{
+			RR = RR->getNext();
+		}
+	}
+}
+
+void Mars_Station::checkinMissinExcec(int Day)
+{
+	Node<Mission>* MM = ExcM.getHead();
+	if (MM->getItem().finishmission())
+	{
+		if (MM->getItem().getType() == 'P')
+		{
+
+			CompP.enqueue(MM->getItem());
+		}
+		else
+		{
+			CompEm.enqueue(MM->getItem());
+		}
+		ExcM.DeleteNode(MM);
+	}
+	else
+	{
+		MM = MM->getNext();
+	}
+	
+}
+
+void Mars_Station::EventsinDay(int Day)
+{
+	Node<Event>* EVC = EVEVE->getHead();
+	if()
+}
+
+void Mars_Station::lookforEmergMissio()
+{
+	if (!EmR.isEmpty()&&!waitingEm.empty())
+	{
+		Mission X = waitingEm.top();
+		Rovers Y; 
+		EmR.dequeue(Y);
+		
+	}
+}
+
+void Mars_Station::checkinCheckup(int Day)
+{
+	Node<Rovers>* RR = CHR.getHead();
+	while (RR)
+	{
+		if (RR->getItem().getfromchecko(Day))
+		{
+			RR->getItem().getfromchecko(Day);
+			if (RR->getItem().getType() == 'P')
+				PolR.enqueue(RR->getItem());
+			else
+				EmR.enqueue(RR->getItem());
+			CHR.DeleteNode(RR);
+		}
+		else
+		{
+			RR = RR->getNext();
+		}
+	}
+}
+
+
 Mars_Station::~Mars_Station()
 {
 }
 
 int main()
 {
-	Mars_Station M1;
+	/*Mars_Station M1;*/
 	/*M1.Save_OutputFile();*/
 	//M1.Read_InputFile();
 }

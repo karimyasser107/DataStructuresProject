@@ -54,6 +54,7 @@ public:
 	void setSignificance(int Sig);
 	int getSignificance();
 
+	bool finishmission();
 };
 
 inline Mission::Mission()
@@ -80,12 +81,12 @@ inline Mission::Mission()
 	NoOfAvailableRovers = 0;
 }
 
-void Mission::setFormulationDay(int FD)
+inline void Mission::setFormulationDay(int FD)
 {
 	FormulationDay = FD;
 }
 
-int Mission::getFormulationDay()
+inline int Mission::getFormulationDay()
 {
 	return FormulationDay;
 }
@@ -117,28 +118,39 @@ inline void Mission::setMissinDuration(int d)
 	MissionDuration = d;
 }
 
-int Mission::getMissionDuration()
+inline int Mission::getMissionDuration()
 {
 	return MissionDuration;
 }
 
-void Mission::settargetLoction(int TLoc)
+inline void Mission::settargetLoction(int TLoc)
 {
 	TargetLocation = TLoc;
 }
 
-int Mission::getTargetLocation()
+inline int Mission::getTargetLocation()
 {
 	return TargetLocation;
 }
 
-void Mission::setSignificance(int Sig)
+inline void Mission::setSignificance(int Sig)
 {
 	Significance = Sig;
 }
 
-int Mission::getSignificance()
+inline int Mission::getSignificance()
 {
 	return Significance;
+}
+
+inline bool Mission::finishmission()
+{
+	if (currentDay == CompletionDay)
+	{
+		state = 1;
+		return true;
+	}
+	else
+		return false;
 }
 

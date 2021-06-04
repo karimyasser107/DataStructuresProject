@@ -1,0 +1,19 @@
+﻿  Mars_Station.cpp
+C:\Users\hp\Desktop\DS_Project_GitHub\DS_project\DS_project_Mars_Exploration\Project1\LinkedList.h(21,1): error C2955: 'Node': use of class template requires template argument list
+C:\Users\hp\Desktop\DS_Project_GitHub\DS_project\DS_project_Mars_Exploration\Project1\Node.h(6): message : see declaration of 'Node'
+C:\Users\hp\Desktop\DS_Project_GitHub\DS_project\DS_project_Mars_Exploration\Project1\LinkedList.h(100): message : see reference to class template instantiation 'LinkedList<T>' being compiled
+C:\Users\hp\Desktop\DS_Project_GitHub\DS_project\DS_project_Mars_Exploration\Project1\Mars_Station.cpp(76,34): error C2440: 'initializing': cannot convert from 'Node *' to 'Node<T> *'
+          with
+          [
+              T=Rovers
+          ]
+C:\Users\hp\Desktop\DS_Project_GitHub\DS_project\DS_project_Mars_Exploration\Project1\Mars_Station.cpp(76,19): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+C:\Users\hp\Desktop\DS_Project_GitHub\DS_project\DS_project_Mars_Exploration\Project1\Mars_Station.cpp(86,21): error C2664: 'void LinkedList<Rovers>::DeleteNode(Node *)': cannot convert argument 1 from 'Node<T> *' to 'Node *'
+          with
+          [
+              T=Rovers
+          ]
+C:\Users\hp\Desktop\DS_Project_GitHub\DS_project\DS_project_Mars_Exploration\Project1\Mars_Station.cpp(86,19): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+C:\Users\hp\Desktop\DS_Project_GitHub\DS_project\DS_project_Mars_Exploration\Project1\LinkedList.h(28,7): message : see declaration of 'LinkedList<Rovers>::DeleteNode'
+  Rovers.cpp
+  Generating Code...
