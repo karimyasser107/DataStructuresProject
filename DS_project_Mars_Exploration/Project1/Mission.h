@@ -9,9 +9,10 @@ private:
 	int NoOfWaitingDays;
 	int NoOfExecutionDays;
 	int CompletionDay;  // CompletionDay = FormulationDay + NoOfWaitingDays + NoOfExecutionDays
+	int TLOCR;
 	float AvgWaitDays;
 	float AvgExecDays;
-
+	int IDofRoverExcecuting;
 	int MissionDuration;
 	int TargetLocation;
 	char Type;
@@ -55,6 +56,9 @@ public:
 	int getSignificance();
 
 	bool finishmission();
+	int getPriority();
+	void setIDofRoverExcecuting(int x);
+	int getIDofRoverExcecuting();
 };
 
 inline Mission::Mission()
@@ -77,7 +81,7 @@ inline Mission::Mission()
 	NoOfInExecutionMission = 0;
 	NoOfCompletedMissions = 0;
 	NoOfMissionsBeforeCHECKUP = 0;
-
+	IDofRoverExcecuting = 0;
 	NoOfAvailableRovers = 0;
 }
 
@@ -152,5 +156,20 @@ inline bool Mission::finishmission()
 	}
 	else
 		return false;
+}
+
+inline int Mission::getPriority()
+{
+	return(int(2 * Significance + 0.5 * MissionDuration + 0.25 * FormulationDay + 0.125 * TLOCR));
+}
+
+inline void Mission::setIDofRoverExcecuting(int x)
+{
+	IDofRoverExcecuting = x;
+}
+
+inline int Mission::getIDofRoverExcecuting()
+{
+	return IDofRoverExcecuting;
 }
 

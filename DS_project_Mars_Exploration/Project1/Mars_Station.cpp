@@ -11,11 +11,11 @@ Mars_Station::Mars_Station()
 	Read_InputFile(Events_List,Available_Emergency_Rovers, Available_Polar_Rovers);
 }
 
-void Mars_Station::Read_InputFile(LinkedList<Event*>&Events_List , LinkedQueue<Rovers>&Available_Emergency_Rovers, LinkedQueue<Rovers>&Available_Polar_Rovers)
+void Mars_Station::Read_InputFile(LinkedList<Event>Event_List , LinkedQueue<Rovers>&Available_Emergency_Rovers, LinkedQueue<Rovers>&Available_Polar_Rovers)
 {
 	ifstream inputFile;
 	int array_of_info_inputfile[8];
-	UI1.Read_InputFile_UI(inputFile, array_of_info_inputfile,Events_List);
+	UI1.Read_InputFile_UI(inputFile, array_of_info_inputfile,Event_List);
 
 	//read first line (number of rovers)
 	int N_Rovers[2];//array contains number of Rovers of each type : Polar , Emergency (respectively)
@@ -134,20 +134,61 @@ void Mars_Station::checkinMissinExcec(int Day)
 
 void Mars_Station::EventsinDay(int Day)
 {
-	Nodo<Event>* EVC = EVEVE->getHead();
-	//if()
+	while (EVEVE.isEmpty())
+	{
+		
+	}
 }
 
-void Mars_Station::lookforEmergMissio()
+void Mars_Station::scanEmergencyMissions()
 {
-	/*if (!EmR.isEmpty()&&!waitingEm.empty())
+	while (!waitingEm.isEmpty())
 	{
-		Mission X = waitingEm.top();
-		Rovers Y; 
-		EmR.dequeue(Y);
-		
-	}*/
+		if (!RFEm.isEmpty())
+		{
+			Mission EX;
+			Rovers ER;
+			RFEm.dequeue(ER);
+			CHX.InsertEnd(ER);
+			waitingEm.dequeue(EX);
+			EX.setIDofRoverExcecuting(ER.getID());
+			ExcM.InsertEnd(EX);
+		}
+		else if (!RFP.isEmpty())
+		{
+			Mission EX;
+			Rovers ER;
+			RFP.dequeue(ER);
+			CHX.InsertEnd(ER);
+			waitingEm.dequeue(EX);
+			EX.setIDofRoverExcecuting(ER.getID());
+			ExcM.InsertEnd(EX);
+		}
+		else
+			return;
+	}
 }
+
+void Mars_Station::scanPolarMissions()
+{
+	while (!waitingPola.isEmpty())
+	{
+		if (!RFP.isEmpty())
+		{
+			Mission EX;
+			Rovers ER;
+			RFEm.dequeue(ER);
+			CHX.InsertEnd(ER);
+			waitingEm.dequeue(EX);
+			EX.setIDofRoverExcecuting(ER.getID());
+			ExcM.InsertEnd(EX);
+		}
+		else
+			return;
+	}
+}
+
+
 
 void Mars_Station::checkinCheckup(int Day)
 {

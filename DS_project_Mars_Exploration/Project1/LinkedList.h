@@ -24,7 +24,7 @@ public:
 
 	// DO NOT CHANGE ANYTHING IN THIS FUNCTION *********
 	void ReadList();
-
+	bool isEmpty();
 	// you should NOT change this function
 	void InsertEnd( T data);
 
@@ -98,6 +98,15 @@ inline void LinkedList<T>::ReadList()
 		this->InsertEnd(val);
 		cin >> val;
 	}
+}
+
+template<typename T>
+inline bool LinkedList<T>::isEmpty()
+{
+	if (Head == NULL)
+		return true;
+	else
+		return false;
 }
 
 // you should NOT change this function
