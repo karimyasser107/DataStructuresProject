@@ -50,7 +50,7 @@ void formulationEvent::Execute(PriorityQueue<Mission>&EmergQ, LinkedQueue<Missio
 {
 	Mission* FM = new Mission() ;
 	FM->setFormulationDay(get_EventDay());
-	FM->setID(get_EventDay());
+	FM->setID(get_MissionID());
 	FM->setType(type);
 	FM->setMissinDuration(missionDuration);
 	FM->settargetLoction(targetLocation);

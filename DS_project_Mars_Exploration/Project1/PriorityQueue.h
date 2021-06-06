@@ -104,7 +104,7 @@ inline void PriorityQueue<T>::push(T& ito, int signo)
 		{
 			Nodo<T>* kod;
 			kod = frontPtr;
-			while (kod->getnext() != NULL && kod->getnext()->getsign() > signo  )
+			while (kod->getnext() != NULL && kod->getnext()->getsign() >= signo  )
 			{
 				kod = kod->getnext();
 			}
@@ -112,16 +112,17 @@ inline void PriorityQueue<T>::push(T& ito, int signo)
 			{
 				Nodo<T>* kok = new Nodo<T>(ito);
 				kok->setsign(signo);
-				kok->setnext(kod->getnext());
+				kok->setnext(NULL);
+				kod->setnext(kok);
 				
-				backPtr = kod->getnext();
+				backPtr = kok;
 			}
 			else
 			{
 				Nodo<T>* kok = new Nodo<T>(ito);
 				kok->setsign(signo);
 				kok->setnext(kod->getnext());
-				backPtr = kod->getnext();
+				kod->setnext(kok);
 			}
 		}
 	}

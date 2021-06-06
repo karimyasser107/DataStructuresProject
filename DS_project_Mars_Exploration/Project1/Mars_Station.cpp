@@ -169,7 +169,10 @@ void Mars_Station::Loop_On_Events_In_Same_Day()
 {
 	if (!EventsList_is_Not_Empty())//karim yasser ghayar di 
 		return;
+	
 	SameDay = Events_List.getHead()->getitem()->get_EventDay();
+	if (SameDay != Current__Day)
+		return;
 	do
 	{
 		Excute_Event_In_Certain_Day();
@@ -281,7 +284,7 @@ int main()
 
 		//output daily
 		M1.Program_Output_Modes();
-		break;
+		//break;
 	}
 
 	//M1.EventsList_is_Not_Empty();
