@@ -89,13 +89,147 @@ void UI_Class::Save_InputFile_UI(ofstream &outputFile)
 	
 }
 
-void UI_Class::Output_Screen_Console(LinkedQueue<Mission>WaitingPolar, PriorityQueue<Mission>WaitingEmergency, LinkedQueue<Rovers>AvailablePolarRover, LinkedQueue<Rovers>AvailableEmergencyRover)
+int UI_Class::choosingInterfaceMode()
+{
+	cout << "Please enter the mode you want:" << endl;
+	cout << "1- Interactive Mode" << endl;
+	cout << "2- Step-By-Step Mode" << endl;
+	cout << "3- Silent Mode" << endl;
+
+	cout << "Your Choice:";
+	int choice;
+	cin >> choice;
+
+	return choice;
+}
+
+void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Mission>WaitingPolar, PriorityQueue<Mission>WaitingEmergency, LinkedQueue<Rovers>Available_Polar_Rovers, LinkedQueue<Rovers>Available_Emergency_Rovers, LinkedList<Mission>InExcecution_Missions, LinkedList<Rovers>Checkup_Rovers, LinkedQueue<Mission>Completed_Polar_Missions, LinkedQueue<Mission>Completed_Emergency_Missions)
 {
 
 	//kareem el sheikh
-	cout << "please enter any key to continue" << endl;
-	char wait_user;
-	cin >> wait_user;
+	cout << endl;
+	cout << "Current Day :" << current_Day << endl;
+	Mission X;
+	Rovers Y;
+	int totalWaitingMissions = WaitingPolar.getQueueSize() + WaitingEmergency.getprioQueueSize();
+	cout << totalWaitingMissions<< " " << "Waiting Missions:" << "   " << "[";
+	while (WaitingEmergency.dequeue(X))
+	{
+		cout << X.getID() << "";
+		if (!WaitingEmergency.isEmpty())
+			cout << ",";
+	}
+	cout << "]" << "       " << "(";
+	while (WaitingPolar.dequeue(X))
+	{
+		cout << X.getID() << "";
+		if (!WaitingPolar.isEmpty())
+			cout << ",";
+	}
+	cout << ")" << endl;
+	cout << "--------------------------------------------------------------------------------------------" << endl;
+	int inExecutionMission = InExcecution_Missions.getListSize();
+	cout << inExecutionMission<< " " << "In-Execution Missions/Rovers:" << "   ";
+	Nodo<Mission>* ptrME = InExcecution_Missions.getHead();
+	cout << "[" << "  ";
+	while (ptrME != nullptr)
+	{
+		if (ptrME->getitem().getType() == 'E')
+		{
+			cout << ptrME->getitem().getID() << "/" << ptrME->getitem().getIDofRoverExcecuting() << " ";
+			if (ptrME->getnext() != nullptr)
+				cout << ",";
+		}
+	}
+	cout << "]" << "      ";
+	Nodo<Mission>* ptrMP = InExcecution_Missions.getHead();
+	cout << "(" << "  ";
+	while (ptrMP != nullptr)
+	{
+		if (ptrMP->getitem().getType() == 'P')
+		{
+			cout << ptrMP->getitem().getID() << "/" << ptrMP->getitem().getIDofRoverExcecuting() << " ";
+			if (ptrMP->getnext() != nullptr)
+				cout << ",";
+		}
+	}
+	cout << ")" << endl;
+	cout << "--------------------------------------------------------------------------------------------" << endl;
+	int totalAvailableRovers = Available_Emergency_Rovers.getQueueSize() + Available_Polar_Rovers.getQueueSize();
+	cout << totalAvailableRovers<< " " << " Available Rovers:" << "      " << "[";
+	while (Available_Emergency_Rovers.dequeue(Y))
+	{
+		cout << Y.getID() << "";
+		if (!Available_Emergency_Rovers.isEmpty())
+			cout << ",";
+	}
+	cout << "]" << "        " << "(";
+	while (Available_Polar_Rovers.dequeue(Y))
+	{
+		cout << Y.getID() << "";
+		if (!Available_Polar_Rovers.isEmpty())
+			cout << ",";
+	}
+	cout << ")" << endl;
+	cout<<"--------------------------------------------------------------------------------------------"<<endl;
+	int totalCheckupRovers = Checkup_Rovers.getListSize();
+	cout << totalCheckupRovers<< " " << "In-Checkup Rovers:" << "      ";
+	Nodo<Rovers>* ptrRE = Checkup_Rovers.getHead();
+	cout << "[" << "  ";
+	while (ptrRE != nullptr)
+	{
+		if (ptrRE->getitem().getType() == 'E')
+		{
+			cout << ptrRE->getitem().getID() << "  ";
+			if (ptrRE->getnext()!=nullptr)
+				cout << ",";
+		}
+	}
+	cout << ']' << "       ";
+	Nodo<Rovers>* ptrRP = Checkup_Rovers.getHead();
+	cout << "(" << "  ";
+	while (ptrRP != nullptr)
+	{
+		if (ptrRP->getitem().getType() == 'P')
+		{
+			cout << ptrRP->getitem().getID() << "  ";
+			if (ptrRP->getnext()!=nullptr)
+				cout << ",";
+		}
+	}
+	cout << ')' << endl ;
+	cout << "--------------------------------------------------------------------------------------------" << endl;
+
+	int totalCompletedMissions = Completed_Emergency_Missions.getQueueSize() + Completed_Polar_Missions.getQueueSize();
+	cout << totalCompletedMissions<< " " << "Completed Missions:" << "      ";
+	cout << "[" << "";
+	while (Completed_Emergency_Missions.dequeue(X))
+	{
+		cout << X.getID() << "";
+		if (!Completed_Emergency_Missions.isEmpty())
+			cout << ",";
+	}
+	cout << "]" << "     ";
+
+	cout << "(" << " ";
+	while (Completed_Polar_Missions.dequeue(X))
+	{
+		cout << X.getID() << "";
+		if (!Completed_Polar_Missions.isEmpty())
+			cout << ",";
+	}
+	cout << ")" << endl;
+
+	if (ModeNo == 1)
+	{
+		cout << "please enter any key to show next day's output:" << endl;
+		char wait_user;
+		cin >> wait_user;
+	}
+	if (ModeNo == 2)
+	{
+		Sleep(2000);
+	}
 }
 
 

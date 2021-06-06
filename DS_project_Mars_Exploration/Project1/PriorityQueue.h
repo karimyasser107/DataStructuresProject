@@ -15,6 +15,7 @@ public:
 	bool isEmpty() const;
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
+	int getprioQueueSize();
 	void print() const;
 	void push(T& ito, int signo);
 	~PriorityQueue();
@@ -65,6 +66,18 @@ inline bool PriorityQueue<T>::peek(T& frntEntry) const
 
 	frntEntry = frontPtr->getitem();
 	return true;
+}
+template <typename T>
+int PriorityQueue<T> ::getprioQueueSize()
+{
+	Nodo<T>* ptr = frontPtr;
+	int c = 0;
+	while (ptr != nullptr)
+	{
+		c++;
+		ptr = ptr->getnext();
+	}
+	return c;
 }
 
 template<typename T>

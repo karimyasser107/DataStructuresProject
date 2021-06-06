@@ -15,6 +15,7 @@ public:
 	bool enqueue(T newEntry);
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
+	int getQueueSize(); 
 	void print() const;
 	~LinkedQueue();
 
@@ -78,6 +79,19 @@ inline bool LinkedQueue<T>::peek(T& frntEntry) const
 
 	frntEntry = frontPtr->getitem();
 	return true;
+}
+
+template <typename T>
+int LinkedQueue<T> ::getQueueSize()
+{
+	Nodo<T>* ptr = frontPtr;
+	int c = 0;
+	while (ptr != nullptr)
+	{
+		c++;
+		ptr = ptr->getnext();
+	}
+	return c;
 }
 
 template<typename T>

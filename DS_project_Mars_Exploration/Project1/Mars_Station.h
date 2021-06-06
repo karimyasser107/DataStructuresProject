@@ -26,12 +26,13 @@ private:
 	LinkedQueue<Mission>Completed_Polar_Missions;
 	LinkedQueue<Mission>Completed_Emergency_Missions;
 	PriorityQueue<Mission>waitingEmergency_Missions;
-	LinkedQueue<Mission>waitingPolar_Emergency;
+	LinkedQueue<Mission>waitingPolar_Missions;
 	bool Simulation_Is_Completed;
 	int Current__Day;//this integer is increased each day by 1 (Not related to the event days)-it is like a calender
 	//so it starts with 1 (means day 1) after the first loop is completed it is increased to be 2 (means day 2) and so on 
 	int SameDay;//to check on the EventsList what are the events that have same EventDay 
 	int N_mission_before_checkup;//is the number of missions the rover completes before performing a checkup
+	int ModeNo;
 public:
 	Mars_Station();
 	/*Read input file function*/
@@ -58,9 +59,11 @@ public:
 	int get_Current__Day();
 	void scanEmergencyMissions();
 	void scanPolarMissions();
+	int getModeNo();
 
 	void Program_Output_Modes();
 	bool The_Simulation_Is_Completed();
+
 	~Mars_Station();
 
 

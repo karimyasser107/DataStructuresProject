@@ -30,6 +30,8 @@ public:
 	// you should NOT change this function
 	void InsertEnd( T data);
 
+	int getListSize();
+
 	void DeleteAll();
 };
 
@@ -139,6 +141,21 @@ inline void LinkedList<T>::InsertEnd( T  data)
 		p = p->getnext();
 	p->setnext(R);
 }
+
+template <typename T>
+int LinkedList<T> ::getListSize()
+{
+	Nodo<T>* ptr = Head;
+	int c = 0;
+	while (ptr != nullptr)
+	{
+		c++;
+		ptr = ptr->getnext();
+	}
+	return c;
+	
+}
+
 template < typename T>
 inline void LinkedList<T>::DeleteAll()
 {

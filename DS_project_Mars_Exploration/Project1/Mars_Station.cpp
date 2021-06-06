@@ -10,6 +10,7 @@ Mars_Station::Mars_Station()
 {
 	Current__Day = 0;
 	Read_InputFile(Events_List,Available_Emergency_Rovers, Available_Polar_Rovers);
+	ModeNo = UI1.choosingInterfaceMode();
 }
 
 void Mars_Station::increase_Current__Day()
@@ -160,7 +161,7 @@ void Mars_Station::Excute_Event_In_Certain_Day()
 {
 	Event* event_;
 	Events_List.DeleteHead(event_);
-	event_->Execute(waitingEmergency_Missions, waitingPolar_Emergency);
+	event_->Execute(waitingEmergency_Missions, waitingPolar_Missions);
 	//delete (*event_)
 	delete event_;
 }
@@ -211,7 +212,7 @@ void Mars_Station::scanEmergencyMissions()
 
 void Mars_Station::scanPolarMissions()
 {
-	while (!waitingPolar_Emergency.isEmpty())
+	while (!waitingPolar_Missions.isEmpty())
 	{
 		if (!Free_Polar_Rovers.isEmpty())
 		{
@@ -250,10 +251,14 @@ void Mars_Station::checkinCheckup(int Day)
 		}
 	}
 }
+int Mars_Station::getModeNo()
+{
+	return ModeNo;
+}
 
 bool Mars_Station::The_Simulation_Is_Completed()
 {
-	if (Events_List.isEmpty() && waitingEmergency_Missions.isEmpty() && waitingPolar_Emergency.isEmpty())//complete this karim yasser
+	if (Events_List.isEmpty() && waitingEmergency_Missions.isEmpty() && waitingPolar_Missions.isEmpty())//complete this karim yasser
 		return true;
 	else
 		return false;
@@ -261,7 +266,7 @@ bool Mars_Station::The_Simulation_Is_Completed()
 
 void Mars_Station :: Program_Output_Modes()
 {
-	UI1.Output_Screen_Console(waitingPolar_Emergency, waitingEmergency_Missions, Available_Polar_Rovers, Available_Emergency_Rovers);
+	UI1.Output_Screen_Console(ModeNo ,Current__Day , waitingPolar_Missions, waitingEmergency_Missions, Available_Polar_Rovers, Available_Emergency_Rovers, InExcecution_Missions, Checkup_Rovers, Completed_Polar_Missions, Completed_Emergency_Missions);
 }
 
 Mars_Station::~Mars_Station()
@@ -283,7 +288,8 @@ int main()
 	
 
 		//output daily
-		M1.Program_Output_Modes();
+		if(M1.getModeNo()!=3)
+			M1.Program_Output_Modes();
 		//break;
 	}
 
@@ -292,5 +298,6 @@ int main()
 	///*M1.Save_OutputFile();*/
 	////M1.Read_InputFile();
 	
+	return 0;
 
 }
