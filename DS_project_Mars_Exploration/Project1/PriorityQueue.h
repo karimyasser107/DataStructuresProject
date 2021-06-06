@@ -84,45 +84,45 @@ inline void PriorityQueue<T>::push(T& ito, int signo)
 {
 	if (isEmpty())
 	{
-		Nodo<T>* kok = new Nodo<T>(ito);
-		kok->setsign(signo);
-		backPtr = frontPtr = kok;
-		kok->setnext(NULL);
+		Nodo<T>* ptr = new Nodo<T>(ito);
+		ptr->setsign(signo);
+		backPtr = frontPtr = ptr;
+		ptr->setnext(NULL);
 		greater = signo;
 	}
 	else
 	{
 		if (signo > greater)
 		{
-			Nodo<T>* kok = new Nodo<T>(ito);
-			kok->setsign(signo);
-			kok->setnext(frontPtr);
-			frontPtr = kok;
+			Nodo<T>* ptr = new Nodo<T>(ito);
+			ptr->setsign(signo);
+			ptr->setnext(frontPtr);
+			frontPtr = ptr;
 			greater = signo;
 		}
 		else
 		{
-			Nodo<T>* kod;
-			kod = frontPtr;
-			while (kod->getnext() != NULL && kod->getnext()->getsign() >= signo  )
+			Nodo<T>* ptr2;
+			ptr2 = frontPtr;
+			while (ptr2->getnext() != NULL && ptr2->getnext()->getsign() >= signo  )
 			{
-				kod = kod->getnext();
+				ptr2 = ptr2->getnext();
 			}
-			if (kod->getnext() == NULL)
+			if (ptr2->getnext() == NULL)
 			{
-				Nodo<T>* kok = new Nodo<T>(ito);
-				kok->setsign(signo);
-				kok->setnext(NULL);
-				kod->setnext(kok);
+				Nodo<T>* ptr = new Nodo<T>(ito);
+				ptr->setsign(signo);
+				ptr->setnext(NULL);
+				ptr->setnext(ptr);
 				
-				backPtr = kok;
+				backPtr = ptr;
 			}
 			else
 			{
-				Nodo<T>* kok = new Nodo<T>(ito);
-				kok->setsign(signo);
-				kok->setnext(kod->getnext());
-				kod->setnext(kok);
+				Nodo<T>* ptr = new Nodo<T>(ito);
+				ptr->setsign(signo);
+				ptr->setnext(ptr2->getnext());
+				ptr2->setnext(ptr);
 			}
 		}
 	}

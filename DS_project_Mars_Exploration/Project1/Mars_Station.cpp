@@ -99,7 +99,7 @@ void Mars_Station::Save_OutputFile()
 
 void Mars_Station::checkinExcec(int Day)
 {
-	Nodo<Rovers>* RR = CHX.getHead();
+	Nodo<Rovers>* RR = InExcecution_Rovers.getHead();
 	while (RR)
 	{
 		if (RR->getitem().finishmission(Day))
@@ -107,8 +107,8 @@ void Mars_Station::checkinExcec(int Day)
 			if (RR->getitem().putinchecko())
 			{
 				RR->getitem().putinchecko();
-				CHR.InsertEnd(RR->getitem());
-				CHX.DeleteNode(RR);
+				Checkup_Rovers.InsertEnd(RR->getitem());
+				InExcecution_Rovers.DeleteNode(RR);
 			}
 			else
 			{
@@ -116,7 +116,7 @@ void Mars_Station::checkinExcec(int Day)
 					Available_Polar_Rovers.enqueue(RR->getitem());
 				else
 					Available_Emergency_Rovers.enqueue(RR->getitem());
-				CHX.DeleteNode(RR);
+				InExcecution_Rovers.DeleteNode(RR);
 			}
 		}
 		else
@@ -128,19 +128,19 @@ void Mars_Station::checkinExcec(int Day)
 
 void Mars_Station::checkinMissinExcec(int Day)
 {
-	Nodo<Mission>* MM = ExcM.getHead();
+	Nodo<Mission>* MM = InExcecution_Missions.getHead();
 	if (MM->getitem().finishmission())
 	{
 		if (MM->getitem().getType() == 'P')
 		{
 
-			CompP.enqueue(MM->getitem());
+			Completed_Polar_Missions.enqueue(MM->getitem());
 		}
 		else
 		{
-			CompEm.enqueue(MM->getitem());
+			Completed_Emergency_Missions.enqueue(MM->getitem());
 		}
-		ExcM.DeleteNode(MM);
+		InExcecution_Missions.DeleteNode(MM);
 	}
 	else
 	{
@@ -160,7 +160,7 @@ void Mars_Station::Excute_Event_In_Certain_Day()
 {
 	Event* event_;
 	Events_List.DeleteHead(event_);
-	event_->Execute(waitingEm, waitingPola);
+	event_->Execute(waitingEmergency_Missions, waitingPolar_Emergency);
 	//delete (*event_)
 	delete event_;
 }
@@ -182,27 +182,27 @@ void Mars_Station::Loop_On_Events_In_Same_Day()
 
 void Mars_Station::scanEmergencyMissions()
 {
-	while (!waitingEm.isEmpty())
+	while (!waitingEmergency_Missions.isEmpty())
 	{
-		if (!RFEm.isEmpty())
+		if (!Free_Emergency_Rovers.isEmpty())
 		{
 			Mission EX;
 			Rovers ER;
-			RFEm.dequeue(ER);
-			CHX.InsertEnd(ER);
-			waitingEm.dequeue(EX);
+			Free_Emergency_Rovers.dequeue(ER);
+			InExcecution_Rovers.InsertEnd(ER);
+			waitingEmergency_Missions.dequeue(EX);
 			EX.setIDofRoverExcecuting(ER.getID());
-			ExcM.InsertEnd(EX);
+			InExcecution_Missions.InsertEnd(EX);
 		}
-		else if (!RFP.isEmpty())
+		else if (!Free_Polar_Rovers.isEmpty())
 		{
 			Mission EX;
 			Rovers ER;
-			RFP.dequeue(ER);
-			CHX.InsertEnd(ER);
-			waitingEm.dequeue(EX);
+			Free_Polar_Rovers.dequeue(ER);
+			InExcecution_Rovers.InsertEnd(ER);
+			waitingEmergency_Missions.dequeue(EX);
 			EX.setIDofRoverExcecuting(ER.getID());
-			ExcM.InsertEnd(EX);
+			InExcecution_Missions.InsertEnd(EX);
 		}
 		else
 			return;
@@ -211,17 +211,17 @@ void Mars_Station::scanEmergencyMissions()
 
 void Mars_Station::scanPolarMissions()
 {
-	while (!waitingPola.isEmpty())
+	while (!waitingPolar_Emergency.isEmpty())
 	{
-		if (!RFP.isEmpty())
+		if (!Free_Polar_Rovers.isEmpty())
 		{
 			Mission EX;
 			Rovers ER;
-			RFEm.dequeue(ER);
-			CHX.InsertEnd(ER);
-			waitingEm.dequeue(EX);
+			Free_Emergency_Rovers.dequeue(ER);
+			InExcecution_Rovers.InsertEnd(ER);
+			waitingEmergency_Missions.dequeue(EX);
 			EX.setIDofRoverExcecuting(ER.getID());
-			ExcM.InsertEnd(EX);
+			InExcecution_Missions.InsertEnd(EX);
 		}
 		else
 			return;
@@ -232,7 +232,7 @@ void Mars_Station::scanPolarMissions()
 
 void Mars_Station::checkinCheckup(int Day)
 {
-	Nodo<Rovers>* RR = CHR.getHead();
+	Nodo<Rovers>* RR = Checkup_Rovers.getHead();
 	while (RR)
 	{
 		if (RR->getitem().getfromchecko(Day))
@@ -242,7 +242,7 @@ void Mars_Station::checkinCheckup(int Day)
 				Available_Polar_Rovers.enqueue(RR->getitem());
 			else
 				Available_Emergency_Rovers.enqueue(RR->getitem());
-			CHR.DeleteNode(RR);
+			Checkup_Rovers.DeleteNode(RR);
 		}
 		else
 		{
@@ -253,7 +253,7 @@ void Mars_Station::checkinCheckup(int Day)
 
 bool Mars_Station::The_Simulation_Is_Completed()
 {
-	if (Events_List.isEmpty() && waitingEm.isEmpty() && waitingPola.isEmpty())//complete this karim yasser
+	if (Events_List.isEmpty() && waitingEmergency_Missions.isEmpty() && waitingPolar_Emergency.isEmpty())//complete this karim yasser
 		return true;
 	else
 		return false;
@@ -261,7 +261,7 @@ bool Mars_Station::The_Simulation_Is_Completed()
 
 void Mars_Station :: Program_Output_Modes()
 {
-	UI1.Output_Screen_Console(waitingPola, waitingEm, Available_Polar_Rovers, Available_Emergency_Rovers);
+	UI1.Output_Screen_Console(waitingPolar_Emergency, waitingEmergency_Missions, Available_Polar_Rovers, Available_Emergency_Rovers);
 }
 
 Mars_Station::~Mars_Station()

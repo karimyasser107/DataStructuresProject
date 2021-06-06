@@ -18,15 +18,15 @@ private:
 	LinkedList<Event*> Events_List;
 	LinkedQueue<Rovers>Available_Polar_Rovers;
 	LinkedQueue<Rovers>Available_Emergency_Rovers;
-	LinkedList<Rovers>CHX;
-	LinkedList<Rovers>CHR;
-	LinkedQueue<Rovers>RFP;
-	LinkedQueue<Rovers>RFEm;
-	LinkedList<Mission>ExcM;
-	LinkedQueue<Mission>CompP;
-	LinkedQueue<Mission>CompEm;
-	PriorityQueue<Mission>waitingEm;
-	LinkedQueue<Mission>waitingPola;
+	LinkedList<Rovers>InExcecution_Rovers;
+	LinkedList<Rovers>Checkup_Rovers;
+	LinkedQueue<Rovers>Free_Polar_Rovers;
+	LinkedQueue<Rovers>Free_Emergency_Rovers;
+	LinkedList<Mission>InExcecution_Missions;
+	LinkedQueue<Mission>Completed_Polar_Missions;
+	LinkedQueue<Mission>Completed_Emergency_Missions;
+	PriorityQueue<Mission>waitingEmergency_Missions;
+	LinkedQueue<Mission>waitingPolar_Emergency;
 	bool Simulation_Is_Completed;
 	int Current__Day;//this integer is increased each day by 1 (Not related to the event days)-it is like a calender
 	//so it starts with 1 (means day 1) after the first loop is completed it is increased to be 2 (means day 2) and so on 
