@@ -6,12 +6,23 @@
 using namespace std;
 
 
-Mars_Station::Mars_Station()	
+Mars_Station::Mars_Station()
 {
+	Current__Day = 0;
 	Read_InputFile(Events_List,Available_Emergency_Rovers, Available_Polar_Rovers);
 }
 
-void Mars_Station::Read_InputFile(LinkedList<Event>Event_List , LinkedQueue<Rovers>&Available_Emergency_Rovers, LinkedQueue<Rovers>&Available_Polar_Rovers)
+void Mars_Station::increase_Current__Day()
+{
+	Current__Day ++;
+}
+
+int Mars_Station::get_Current__Day()
+{
+	return Current__Day;
+}
+
+void Mars_Station::Read_InputFile(LinkedList<Event*>&Event_List , LinkedQueue<Rovers>&Available_Emergency_Rovers, LinkedQueue<Rovers>&Available_Polar_Rovers)
 {
 	ifstream inputFile;
 	int array_of_info_inputfile[8];
@@ -32,24 +43,30 @@ void Mars_Station::Read_InputFile(LinkedList<Event>Event_List , LinkedQueue<Rove
 	
 	//read the fourth line (E: number of events)
 	int N_Events= array_of_info_inputfile[7];
-
+	
+	//unique ID for each Rover
+	int Unique_ID_Rover = 11899;
 	//fill the polar rover Queue
 	for(int i=0;i< N_Rovers[0];i++)
 	{
+		Unique_ID_Rover++;
 		Rovers* rover1= new Rovers;
 		rover1->setSpeed(Speed_Rovers[0]);
 		rover1->setCheckupDuration(Check_up_Duration_Polar_Rov);
 		rover1->setType('P');
+		rover1->setID(Unique_ID_Rover);
 		Available_Polar_Rovers.enqueue(*rover1);
 		rover1 = NULL;
 	}
 	//fill the emergency rover Queue
 	for (int i = 0;i < N_Rovers[1];i++)
 	{
+		Unique_ID_Rover++;
 		Rovers* rover1 = new Rovers;
 		rover1->setSpeed(Speed_Rovers[1]);
 		rover1->setCheckupDuration(Check_up_Duration_Emerg_Rov);
 		rover1->setType('E');
+		rover1->setID(Unique_ID_Rover);
 		Available_Emergency_Rovers.enqueue(*rover1);
 		rover1 = NULL;
 	}
@@ -132,12 +149,32 @@ void Mars_Station::checkinMissinExcec(int Day)
 	
 }
 
-void Mars_Station::EventsinDay(int Day)
+bool Mars_Station::EventsList_is_Not_Empty()
 {
-	while (EVEVE.isEmpty())
+	if (Events_List.isEmpty())
+		return false;
+	return true;
+}
+
+void Mars_Station::Excute_Event_In_Certain_Day()
+{
+	Event* event_;
+	Events_List.DeleteHead(event_);
+	event_->Execute(waitingEm, waitingPola);
+	//delete (*event_)
+	delete event_;
+}
+
+void Mars_Station::Loop_On_Events_In_Same_Day()
+{
+	if (!EventsList_is_Not_Empty())//karim yasser ghayar di 
+		return;
+	SameDay = Events_List.getHead()->getitem()->get_EventDay();
+	do
 	{
-		
-	}
+		Excute_Event_In_Certain_Day();
+	} while (Events_List.getHead() && Events_List.getHead()->getitem()->get_EventDay() == SameDay);
+	
 }
 
 void Mars_Station::scanEmergencyMissions()
@@ -211,6 +248,18 @@ void Mars_Station::checkinCheckup(int Day)
 	}
 }
 
+bool Mars_Station::The_Simulation_Is_Completed()
+{
+	if (Events_List.isEmpty() && waitingEm.isEmpty() && waitingPola.isEmpty())//complete this karim yasser
+		return true;
+	else
+		return false;
+}
+
+void Mars_Station :: Program_Output_Modes()
+{
+	UI1.Output_Screen_Console(waitingPola, waitingEm, Available_Polar_Rovers, Available_Emergency_Rovers);
+}
 
 Mars_Station::~Mars_Station()
 {
@@ -218,7 +267,25 @@ Mars_Station::~Mars_Station()
 
 int main()
 {
+	//HERE we call functions ONLY
 	Mars_Station M1;
+	while (!(M1.The_Simulation_Is_Completed()))
+	{
+		M1.increase_Current__Day();
+		//ahmed heikal CALL el fn assign rover w kol el fn el tania bta3t simulation hena
+		
+		M1.Loop_On_Events_In_Same_Day();
+
+		
+	
+
+		//output daily
+		M1.Program_Output_Modes();
+		break;
+	}
+
+	//M1.EventsList_is_Not_Empty();
+
 	///*M1.Save_OutputFile();*/
 	////M1.Read_InputFile();
 	

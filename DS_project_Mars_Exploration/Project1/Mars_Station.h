@@ -7,7 +7,7 @@
 #include"PriorityQueue.h"
 #include"Mission.h"
 #include"Rovers.h"
-//#include"Node.h"
+#include"Nodo.h"
 //#include<queue>
 
 class Mars_Station
@@ -18,12 +18,6 @@ private:
 	LinkedList<Event*> Events_List;
 	LinkedQueue<Rovers>Available_Polar_Rovers;
 	LinkedQueue<Rovers>Available_Emergency_Rovers;
-	int N_mission_before_checkup;//is the number of missions the rover completes before performing a checkup
-public:
-	Mars_Station();
-	/*Read input file function*/
-	
-	LinkedList<Event*>&EVEVE;
 	LinkedList<Rovers>CHX;
 	LinkedList<Rovers>CHR;
 	LinkedQueue<Rovers>RFP;
@@ -33,6 +27,17 @@ public:
 	LinkedQueue<Mission>CompEm;
 	PriorityQueue<Mission>waitingEm;
 	LinkedQueue<Mission>waitingPola;
+	bool Simulation_Is_Completed;
+	int Current__Day;//this integer is increased each day by 1 (Not related to the event days)-it is like a calender
+	//so it starts with 1 (means day 1) after the first loop is completed it is increased to be 2 (means day 2) and so on 
+	int SameDay;//to check on the EventsList what are the events that have same EventDay 
+	int N_mission_before_checkup;//is the number of missions the rover completes before performing a checkup
+public:
+	Mars_Station();
+	/*Read input file function*/
+	
+	//LinkedList<Event*>&EVEVE;
+	
 	//Mars_Station(LinkedList<Event>X);
 	//read input file function
 
@@ -42,9 +47,20 @@ public:
 	void checkinCheckup( int Day);
 	void checkinExcec(int Day);
 	void checkinMissinExcec(int Day);
-	void EventsinDay(int Day);	
+	bool EventsList_is_Not_Empty();
+	
+	void Excute_Event_In_Certain_Day();//call Appropriate version of Excute according to the event type
+	void Loop_On_Events_In_Same_Day();//This function loops on the EventsList 
+	//and out all events that are in SAME DAY ONLY
+	//in order to be excuted
+
+	void increase_Current__Day();
+	int get_Current__Day();
 	void scanEmergencyMissions();
 	void scanPolarMissions();
+
+	void Program_Output_Modes();
+	bool The_Simulation_Is_Completed();
 	~Mars_Station();
 
 

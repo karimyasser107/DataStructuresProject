@@ -19,8 +19,10 @@ public:
 	// Prints the linked list in the required format
 	// DON'T CHANGE ANYTHING INSIDE THIS FUNCTION *********
 	// BECAUSE THE AUTOMATIC JUDGE COMPARES FOR THIS FORMAT
-	void DeleteNode(Nodo<T>* Doll);
 	void PrintList()	const;
+
+	void DeleteNode(Nodo<T>* Doll);
+	 void DeleteHead(T&);
 
 	// DO NOT CHANGE ANYTHING IN THIS FUNCTION *********
 	void ReadList();
@@ -50,6 +52,19 @@ inline Nodo<T>* LinkedList<T>::getHead()
 // Prints the linked list in the required format
 // DON'T CHANGE ANYTHING INSIDE THIS FUNCTION *********
 // BECAUSE THE AUTOMATIC JUDGE COMPARES FOR THIS FORMAT
+
+template < typename T>
+inline void LinkedList<T>::PrintList()	const
+{
+	Nodo<T>* p = Head;
+	while (p)
+	{
+		cout << p->getitem() << " ";
+		p = p->getnext();
+	}
+	cout << endl;
+}
+
 template < typename T>
 inline void LinkedList<T>::DeleteNode(Nodo<T>* Doll)
 {
@@ -75,16 +90,16 @@ inline void LinkedList<T>::DeleteNode(Nodo<T>* Doll)
 		Doll = Toll;
 	}
 }
+
+
 template < typename T>
-inline void LinkedList<T>::PrintList()	const
+ void LinkedList<T>::DeleteHead(T& passed_Item)
 {
-	Nodo<T>* p = Head;
-	while (p)
-	{
-		cout << p->getitem() << " ";
-		p = p->getnext();
-	}
-	cout << endl;
+	passed_Item = Head->getitem();
+	Nodo<T>* temp = Head;
+	Head=temp->getnext();
+	delete temp;
+	return;
 }
 
 // DO NOT CHANGE ANYTHING IN THIS FUNCTION *********

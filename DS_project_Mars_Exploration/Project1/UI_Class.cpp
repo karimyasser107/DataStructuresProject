@@ -67,6 +67,7 @@ void UI_Class::Read_InputFile_UI(ifstream & inputFile, int* array_of_info_inputf
 			inputFile >> temp_input;//read mission Significance
 			(*F_event)->set_Significance(temp_input);
 			Events_List.InsertEnd((*F_event));
+			delete F_event;
 			F_event = NULL;
 		}
 	}
@@ -87,6 +88,16 @@ void UI_Class::Save_InputFile_UI(ofstream &outputFile)
 	return;
 	
 }
+
+void UI_Class::Output_Screen_Console(LinkedQueue<Mission>WaitingPolar, PriorityQueue<Mission>WaitingEmergency, LinkedQueue<Rovers>AvailablePolarRover, LinkedQueue<Rovers>AvailableEmergencyRover)
+{
+
+	//kareem el sheikh
+	cout << "please enter any key to continue" << endl;
+	char wait_user;
+	cin >> wait_user;
+}
+
 
 UI_Class::~UI_Class()
 {
