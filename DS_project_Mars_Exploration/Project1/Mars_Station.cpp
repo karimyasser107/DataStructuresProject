@@ -74,6 +74,7 @@ void Mars_Station::Read_InputFile(LinkedList<Event*>&Event_List , LinkedQueue<Ro
 
 	//close file
 	inputFile.close();
+	return;
 }
 void Mars_Station::Save_OutputFile()
 {
@@ -185,21 +186,21 @@ void Mars_Station::scanEmergencyMissions()
 {
 	while (!waitingEmergency_Missions.isEmpty())
 	{
-		if (!Free_Emergency_Rovers.isEmpty())
+		if (!Available_Emergency_Rovers.isEmpty())
 		{
 			Mission EX;
 			Rovers ER;
-			Free_Emergency_Rovers.dequeue(ER);
+			Available_Emergency_Rovers.dequeue(ER);
 			InExcecution_Rovers.InsertEnd(ER);
 			waitingEmergency_Missions.dequeue(EX);
 			EX.setIDofRoverExcecuting(ER.getID());
 			InExcecution_Missions.InsertEnd(EX);
 		}
-		else if (!Free_Polar_Rovers.isEmpty())
+		else if (!Available_Polar_Rovers.isEmpty())
 		{
 			Mission EX;
 			Rovers ER;
-			Free_Polar_Rovers.dequeue(ER);
+			Available_Polar_Rovers.dequeue(ER);
 			InExcecution_Rovers.InsertEnd(ER);
 			waitingEmergency_Missions.dequeue(EX);
 			EX.setIDofRoverExcecuting(ER.getID());
@@ -214,11 +215,11 @@ void Mars_Station::scanPolarMissions()
 {
 	while (!waitingPolar_Missions.isEmpty())
 	{
-		if (!Free_Polar_Rovers.isEmpty())
+		if (!Available_Polar_Rovers.isEmpty())
 		{
 			Mission EX;
 			Rovers ER;
-			Free_Emergency_Rovers.dequeue(ER);
+			Available_Emergency_Rovers.dequeue(ER);
 			InExcecution_Rovers.InsertEnd(ER);
 			waitingEmergency_Missions.dequeue(EX);
 			EX.setIDofRoverExcecuting(ER.getID());
@@ -258,7 +259,7 @@ int Mars_Station::getModeNo()
 
 bool Mars_Station::The_Simulation_Is_Completed()
 {
-	if (Events_List.isEmpty() && waitingEmergency_Missions.isEmpty() && waitingPolar_Missions.isEmpty())//complete this karim yasser
+	if (Events_List.isEmpty() && waitingEmergency_Missions.isEmpty() && waitingPolar_Missions.isEmpty() && InExcecution_Rovers.isEmpty() && Checkup_Rovers.isEmpty())//complete this karim yasser
 		return true;
 	else
 		return false;
@@ -292,12 +293,6 @@ int main()
 			M1.Program_Output_Modes();
 		//break;
 	}
-
-	//M1.EventsList_is_Not_Empty();
-
 	///*M1.Save_OutputFile();*/
-	////M1.Read_InputFile();
-	
 	return 0;
-
 }

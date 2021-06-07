@@ -126,7 +126,7 @@ inline void PriorityQueue<T>::push(T& ito, int signo)
 				Nodo<T>* ptr = new Nodo<T>(ito);
 				ptr->setsign(signo);
 				ptr->setnext(NULL);
-				ptr->setnext(ptr);
+				ptr2->setnext(ptr);
 				
 				backPtr = ptr;
 			}

@@ -12,6 +12,7 @@ UI_Class::UI_Class()
 
 void UI_Class::Read_InputFile_UI(ifstream & inputFile, int* array_of_info_inputfile, LinkedList<Event*>& Events_List)
 {
+	cout << "                    Mars Station" << endl << endl;
 	//Print Action Message 
 	string File_Name;
 	cout << ("Load an Exicting Input File: Please enter File Name (.txt)  ") << endl;
@@ -19,9 +20,19 @@ void UI_Class::Read_InputFile_UI(ifstream & inputFile, int* array_of_info_inputf
 	//open the file
 	inputFile.open(File_Name);
 	if (inputFile.is_open())
-		cout << "Load Input File was Done successfully " << endl;
+		cout << "Load Input File was Done successfully " << endl<<endl;
 	else
-		cout << ("Error: File was not Found") << endl;
+	{
+		do
+		{
+			cout << ("Error: File was not Found") << endl;
+			cout << "Please enter File Name (.txt)  " << endl;
+			cin >> File_Name;
+			inputFile.open(File_Name);
+		} while (!inputFile.is_open());
+		cout <<"Load Input File was Done successfully " << endl<<endl;
+	}
+		
 
 	//read first line (number of rovers)
 	//NOW first 2 elements of the array contains number of Rovers of each type : Polar , Emergency (respectively)
@@ -73,7 +84,7 @@ void UI_Class::Read_InputFile_UI(ifstream & inputFile, int* array_of_info_inputf
 	}
 
 	//close file
-	inputFile.close();
+	//inputFile.close();
 	return;
 }
 void UI_Class::Save_InputFile_UI(ofstream &outputFile)
