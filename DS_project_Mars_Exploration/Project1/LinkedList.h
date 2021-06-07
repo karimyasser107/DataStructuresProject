@@ -30,6 +30,8 @@ public:
 	// you should NOT change this function
 	void InsertEnd( T data);
 
+	LinkedList(LinkedList<T>& Q);
+
 	int getListSize();
 
 	void DeleteAll();
@@ -41,6 +43,29 @@ inline LinkedList<T>::LinkedList()
 {
 	Head = nullptr;
 }
+
+template<typename T>
+LinkedList<T>::LinkedList(LinkedList& Q) 
+{
+	if (Q.Head == nullptr) 
+	{
+		Head = nullptr;
+	}
+	else 
+	{
+		Head = new Nodo<T>(Q.getHead()->getitem());
+		Nodo<T>* current = Head;
+		Nodo<T>* QHead = Q.Head;
+		Nodo<T>* currentQ = QHead;
+		while (currentQ->getnext() != nullptr) 
+		{
+			current->setnext(new Nodo<T>(currentQ->getnext()->getitem()));
+			currentQ = currentQ->getnext();
+			current = current->getnext();
+		}
+	}
+}
+
 template < typename T>
 inline LinkedList<T>::~LinkedList()
 {
