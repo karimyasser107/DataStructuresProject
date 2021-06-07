@@ -81,7 +81,7 @@ void Mars_Station::Read_InputFile(LinkedList<Event*>&Event_List , LinkedQueue<Ro
 void Mars_Station::Save_OutputFile()
 {
 	//call function save of class UI_Class
-	UI1.Save_InputFile_UI(Available_Polar_Rovers, Available_Emergency_Rovers, Completed_Polar_Missions, Completed_Emergency_Missions);
+	UI1.Save_InputFile_UI(Available_Polar_Rovers, Available_Emergency_Rovers, Completed_Polar_Misssions, Completed_Emergency_Missions);
 }
 
 
@@ -124,7 +124,7 @@ void Mars_Station::checkinMissinExcec(int Day)
 		if (MM->getitem().getType() == 'P')
 		{
 
-			Completed_Polar_Missions.enqueue(MM->getitem());
+			Completed_Polar_Misssions.enqueue(MM->getitem());
 		}
 		else
 		{
@@ -297,7 +297,7 @@ bool Mars_Station::The_Simulation_Is_Completed()
 
 void Mars_Station :: Program_Output_Modes()
 {
-	UI1.Output_Screen_Console(ModeNo ,Current__Day , waitingPolar_Missions, waitingEmergency_Missions, Available_Polar_Rovers, Available_Emergency_Rovers, Completed_Polar_Missions, Completed_Emergency_Missions);
+	UI1.Output_Screen_Console(ModeNo ,Current__Day , waitingPolar_Missions, waitingEmergency_Missions, Available_Polar_Rovers, Available_Emergency_Rovers,InExcecution_Missions,Checkup_Rovers ,Completed_Polar_Misssions, Completed_Emergency_Missions);
 }
 
 Mars_Station::~Mars_Station()
