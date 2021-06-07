@@ -87,14 +87,56 @@ void UI_Class::Read_InputFile_UI(ifstream & inputFile, int* array_of_info_inputf
 	//inputFile.close();
 	return;
 }
-void UI_Class::Save_InputFile_UI(ofstream &outputFile)
+void UI_Class::Save_InputFile_UI(LinkedQueue<Rovers>Available_Polar_Rovers, LinkedQueue<Rovers>Available_Emergency_Rovers, LinkedQueue<Mission>Completed_Polar_Missions, LinkedQueue<Mission>Completed_Emergency_Missions)
 {
+	//Create new Output File
+	ofstream outputFile;
+
 	//Print Action Message 
 	string File_Name;
 	cout<<("Save Output File: Please enter File Name (example.txt)  ")<<endl;
 	cin >> File_Name;
+
 	//open the file
 	outputFile.open(File_Name, ios::out);
+
+	//Clculate total number of missions
+	int TOT_number_Emerg_Missions = Completed_Emergency_Missions.getQueueSize();
+	int TOT_number_Polar_Missions = Completed_Polar_Missions.getQueueSize();
+
+	//calculate total number of Rovers
+	int total_Available_Polar_Rovers = Available_Polar_Rovers.getQueueSize();
+	int total_Available_Emerg_Rovers = Available_Emergency_Rovers.getQueueSize();
+	int Total_No_Missions = TOT_number_Emerg_Missions + TOT_number_Polar_Missions;
+
+	//create a new list
+	while (true)
+	{
+
+	}
+	int arr[5] = { 18,1,7,5,6 };
+
+	outputFile << "CD   ID   FD   WD   ED " << endl;
+	
+
+	outputFile << arr[0] << "   ";
+	outputFile << arr[1] << "    ";
+	outputFile << arr[2] << "    ";
+	outputFile << arr[3] << "    ";
+	outputFile << arr[4] << endl;
+
+
+	outputFile << "………………………………………………" << endl << "………………………………………………" << endl << endl;
+	
+	
+
+	outputFile << "Missions: " << Total_No_Missions;
+	outputFile << "     [P: " << TOT_number_Polar_Missions << ", E: " << TOT_number_Emerg_Missions << "]" << endl;
+	outputFile << "Rovers: " << total_Available_Emerg_Rovers+total_Available_Polar_Rovers ;
+	outputFile << "      [P: " << total_Available_Polar_Rovers << ", E: " << total_Available_Emerg_Rovers << "]" << endl;
+	outputFile << "Avg Wait = " << 7 << ", Avg Exec =" << endl;
+	if (outputFile.is_open())
+		outputFile.close();
 	cout << ("Output File is generated and Saved succesfully ") << endl;
 	return;
 	

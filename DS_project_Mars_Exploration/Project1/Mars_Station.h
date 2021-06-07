@@ -56,9 +56,12 @@ public:
 
 	void scanEmergencyMissions();
 	void scanPolarMissions();
-	int getModeNo();
+	
+	//BONUS Mission Fail
+	void Mission_Failure();
 
 	//Output Modes
+	int getModeNo();
 	void Program_Output_Modes();
 	bool The_Simulation_Is_Completed();
 

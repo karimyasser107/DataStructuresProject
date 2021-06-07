@@ -16,21 +16,19 @@ public:
 
 	~LinkedList();
 	Nodo<T>* getHead();
-	// Prints the linked list in the required format
-	// DON'T CHANGE ANYTHING INSIDE THIS FUNCTION *********
-	// BECAUSE THE AUTOMATIC JUDGE COMPARES FOR THIS FORMAT
 	void PrintList()	const;
 
 	void DeleteNode(Nodo<T>* Doll);
-	 void DeleteHead(T&);
+	void DeleteHead(T&);
 
-	// DO NOT CHANGE ANYTHING IN THIS FUNCTION *********
 	void ReadList();
 	bool isEmpty();
-	// you should NOT change this function
+
 	void InsertEnd( T data);
 
 	int getListSize();
+
+	Nodo<T>* getNode_With_Pos(int);
 
 	void DeleteAll();
 };
@@ -51,9 +49,6 @@ inline Nodo<T>* LinkedList<T>::getHead()
 {
 	return Head;
 }
-// Prints the linked list in the required format
-// DON'T CHANGE ANYTHING INSIDE THIS FUNCTION *********
-// BECAUSE THE AUTOMATIC JUDGE COMPARES FOR THIS FORMAT
 
 template < typename T>
 inline void LinkedList<T>::PrintList()	const
@@ -104,7 +99,7 @@ template < typename T>
 	return;
 }
 
-// DO NOT CHANGE ANYTHING IN THIS FUNCTION *********
+
 template < typename T>
 inline void LinkedList<T>::ReadList()
 {
@@ -126,7 +121,7 @@ inline bool LinkedList<T>::isEmpty()
 		return false;
 }
 
-// you should NOT change this function
+
 template < typename T>
 inline void LinkedList<T>::InsertEnd( T  data)
 {
@@ -154,6 +149,23 @@ int LinkedList<T> ::getListSize()
 	}
 	return c;
 	
+}
+
+template <typename T>
+Nodo<T>* LinkedList<T> ::getNode_With_Pos(int pos)
+{
+	if (pos == 0)
+		return NULL;
+	int c = 0;
+	Nodo<T>* ptr = Head;
+	while (ptr)
+	{
+		c++;
+		if (c = pos)
+			return ptr;
+		ptr = ptr->getnext();
+	}
+	return NULL;
 }
 
 template < typename T>

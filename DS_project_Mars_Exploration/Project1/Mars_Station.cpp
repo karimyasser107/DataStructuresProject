@@ -78,23 +78,8 @@ void Mars_Station::Read_InputFile(LinkedList<Event*>&Event_List , LinkedQueue<Ro
 }
 void Mars_Station::Save_OutputFile()
 {
-	int arr[5] = { 18,1,7,5,6 };
-	//Create new Output File
-	ofstream outputFile;
-	UI1.Save_InputFile_UI(outputFile);//call function save of class UI_Class
-	outputFile << "CD   ID   FD   WD   ED "<< endl;
-	outputFile << arr[0] << "   ";
-	outputFile << arr[1] << "    ";
-	outputFile << arr[2] << "    ";
-	outputFile << arr[3] << "    ";
-	outputFile << arr[4] <<endl;
-	outputFile << "………………………………………………" << endl << "………………………………………………" << endl<<endl;
-	outputFile << "Missions:" << endl;
-	outputFile << "Rovers:" << endl;
-	outputFile << "Avg Wait = " <<7<<", Avg Exec ="<< endl;
-	if (outputFile.is_open())
-		outputFile.close();
-
+	//call function save of class UI_Class
+	UI1.Save_InputFile_UI(Available_Polar_Rovers, Available_Emergency_Rovers, Completed_Polar_Missions, Completed_Emergency_Missions);
 }
 
 
@@ -162,8 +147,8 @@ void Mars_Station::Excute_Event_In_Certain_Day()
 {
 	Event* event_;
 	Events_List.DeleteHead(event_);
+	//call function excute of Event class
 	event_->Execute(waitingEmergency_Missions, waitingPolar_Missions);
-	//delete (*event_)
 	delete event_;
 }
 
@@ -252,6 +237,37 @@ void Mars_Station::checkinCheckup(int Day)
 		}
 	}
 }
+//BONUS //Ahmed Fayez
+void Mars_Station::Mission_Failure()
+{
+	if (InExcecution_Missions.isEmpty())
+		return;
+
+	//generate a random position in list of Missions 
+	int N_missions=InExcecution_Missions.getListSize();
+	int Random_Pos_Mission=rand()% N_missions +1;
+	Nodo<Mission>* Node_Mission_to_be_Failed = NULL;
+	Node_Mission_to_be_Failed = InExcecution_Missions.getNode_With_Pos(Random_Pos_Mission);
+	Mission Mission_to_be_Failed = Node_Mission_to_be_Failed->getitem();
+
+	//generate a random number to indicate the probability of a Mission to be Failed
+	int Failure_Prob = rand() % 100 + 1;
+	
+	if (Failure_Prob > 95 && Node_Mission_to_be_Failed->getitem().getTargetLocation()>500)
+	{
+		//3 things MUST happen to enter here (to make the Mission Failure Probability very low)
+		//1. failure prob must be > 95 %
+		//2. target location must be > 500 km
+		//3. Current day must be divisible by 3 
+
+		//Ahmed Fayez
+
+
+	}
+	return;
+}
+
+//Output
 int Mars_Station::getModeNo()
 {
 	return ModeNo;
@@ -272,6 +288,7 @@ void Mars_Station :: Program_Output_Modes()
 
 Mars_Station::~Mars_Station()
 {
+	
 }
 
 int main()
@@ -288,10 +305,14 @@ int main()
 		
 	
 
+
+		//BONUS
+		if (M1.get_Current__Day() % 3 == 0)
+			M1.Mission_Failure();
+
 		//output daily
 		if(M1.getModeNo()!=3)
 			M1.Program_Output_Modes();
-		//break;
 	}
 	///*M1.Save_OutputFile();*/
 	return 0;
