@@ -182,24 +182,24 @@ void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Miss
 	}
 	cout << ")" << endl;
 	cout << "--------------------------------------------------------------------------------------------" << endl;
-	//int inExecutionMission = InExcecution_Missions.getListSize();
-	//cout << inExecutionMission<< " " << "In-Execution Missions/Rovers:" << "   ";
-	//Nodo<Mission>* ptrME = InExcecution_Missions.getHead();
-	//cout << "[" << "";
-	///*cout << endl << endl << endl << endl << endl << endl << endl;*/
-	//while (ptrME)
-	//{
-	//	if (ptrME->getitem().getType() == 'E')
-	//	{
-	//		cout << ptrME->getitem().getID() << "/" << ptrME->getitem().getIDofRoverExcecuting() << " ";
-	//		if (ptrME->getnext())
-	//			if (ptrME->getnext()->getitem().getType() == 'E')
-	//				   cout << ",";
-	//	}
-	//	ptrME = ptrME->getnext();
-	//}
-	//cout << "]" << "      ";
-	/*Nodo<Mission>* ptrMP = InExcecution_Missions.getHead();
+	int inExecutionMission = InExcecution_Missions.getListSize();
+	cout << inExecutionMission<< " " << "In-Execution Missions/Rovers:" << "   ";
+	Nodo<Mission>* ptrME = InExcecution_Missions.getHead();
+	cout << "[" << "";
+	/*cout << endl << endl << endl << endl << endl << endl << endl;*/
+	while (ptrME)
+	{
+		if (ptrME->getitem().getType() == 'E')
+		{
+			cout << ptrME->getitem().getID() << "/" << ptrME->getitem().getIDofRoverExcecuting() << " ";
+			if (ptrME->getnext())
+				if (ptrME->getnext()->getitem().getType() == 'E')
+					   cout << ",";
+		}
+		ptrME = ptrME->getnext();
+	}
+	cout << "]" << "      ";
+	Nodo<Mission>* ptrMP = InExcecution_Missions.getHead();
 	cout << "(" << "";
 	while (ptrMP)
 	{
@@ -211,7 +211,7 @@ void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Miss
 				    cout << ",";
 		}
 		ptrMP = ptrMP->getnext();
-	}*/
+	}
 	cout << ")" << endl;
 	cout << "--------------------------------------------------------------------------------------------" << endl;
 	int totalAvailableRovers = Available_Emergency_Rovers.getQueueSize() + Available_Polar_Rovers.getQueueSize();
@@ -231,7 +231,7 @@ void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Miss
 	}
 	cout << ")" << endl;
 	cout<<"--------------------------------------------------------------------------------------------"<<endl;
-	/*int totalCheckupRovers = Checkup_Rovers.getListSize();
+	int totalCheckupRovers = Checkup_Rovers.getListSize();
 	cout << totalCheckupRovers<< " " << "In-Checkup Rovers:" << "      ";
 	Nodo<Rovers>* ptrRE = Checkup_Rovers.getHead();
 	cout << "[" << "  ";
@@ -256,7 +256,7 @@ void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Miss
 				cout << ",";
 		}
 		ptrRP=ptrRP->getnext();
-	}*/
+	}
 	cout << ')' << endl ;
 	cout << "--------------------------------------------------------------------------------------------" << endl;
 

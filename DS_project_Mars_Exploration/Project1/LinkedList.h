@@ -44,7 +44,6 @@ inline LinkedList<T>::LinkedList()
 {
 	Head = NULL;
 }
-<<<<<<< HEAD
 
 template<typename T>
 LinkedList<T>::LinkedList(LinkedList& Q) 
@@ -68,39 +67,7 @@ LinkedList<T>::LinkedList(LinkedList& Q)
 	}
 }
 
-=======
-//template<typename T>
-//inline LinkedList<T>::LinkedList(const LinkedList<T>& list)
-//{
-//	if (list.Head == nullptr)
-//	{
-//		Head = nullptr;
-//		return;
-//	}
-//
-//	Nodo<T>* temp = list.Head;
-//	Nodo<T>* newNode = nullptr;
-//
-//	while (temp != nullptr)
-//	{
-//		newNode = new Nodo<T>();
-//		newNode->setitem(temp->getitem());
-//		newNode->setnext(NULL);
-//
-//		if (Head == nullptr)
-//		{
-//			Head = newNode;
-//			/*tail = newNode;*/
-//		}
-//		//else
-//		//{
-//		//	/*tail->next = newNode;
-//		//	tail = newNode;*/
-//		//}
-//		temp = temp->getnext();
-//	}
-//}
->>>>>>> 643db4cabbb6f9987f40872184b14b251920ca62
+
 template < typename T>
 inline LinkedList<T>::~LinkedList()
 {

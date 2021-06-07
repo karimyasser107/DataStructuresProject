@@ -33,6 +33,9 @@ public:
 	void setstartcheckupday(int day);
 	void incrementnumberofmissionsnow();
 	void setstartofMissionday(int Day);
+	void setCurrentDay(int y);
+	int getspeed();
+	void setN_mission_before_checkup(int x);
 };
 
 
@@ -151,4 +154,19 @@ inline void Rovers::incrementnumberofmissionsnow()
 inline void Rovers::setstartofMissionday(int Day)
 {
 	startofmissionday = Day;
+}
+
+inline void Rovers::setCurrentDay(int y)
+{
+	CurrentDay = y;
+}
+
+inline int Rovers::getspeed()
+{
+	return speed;
+}
+
+inline void Rovers::setN_mission_before_checkup(int x)
+{
+	NoOfMissionsMax = x;
 }

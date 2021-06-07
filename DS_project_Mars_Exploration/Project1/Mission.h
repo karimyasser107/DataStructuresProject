@@ -1,4 +1,5 @@
 #pragma once
+#include"Rovers.h"
 class Mission
 {
 private:
@@ -17,7 +18,7 @@ private:
 	int TargetLocation;
 	char Type;
 	int Significance;
-
+	int MDUR;
 	int NoOfEmergencyMissions;
 	int NoOfPolarMissions;
 	int NoOfMountainousMissions;
@@ -25,7 +26,7 @@ private:
 	int NoOfMissionsBeforeCHECKUP = 0;
 	int AutoPromotedPercentage;  // Mountainous Missions only
 	//Missionfailure ===>> BONUS
-
+	Rovers ER;
 	int NoOfWaitingMissions;
 	int NoOfInExecutionMission;
 	int NoOfCompletedMissions;
@@ -55,10 +56,13 @@ public:
 	void setSignificance(int Sig);
 	int getSignificance();
 	void startofExcecutiondayo(int Day);
-	bool finishmission();
+	bool finishmission(int s);
 	int getPriority();
 	void setIDofRoverExcecuting(int x);
 	int getIDofRoverExcecuting();
+	void setMDUR(int x);
+	int getMDUR();
+	void setCompletionday(int x);
 };
 
 inline Mission::Mission()
@@ -70,13 +74,13 @@ inline Mission::Mission()
 	AvgExecDays = 0;
 	EndDay = -1;
 	CompletionDay = FormulationDay + NoOfWaitingDays + NoOfExecutionDays;
+
 	startofExcecutionday = 0;
 	NoOfEmergencyMissions = 0;
 	NoOfPolarMissions = 0;
 	NoOfMountainousMissions = 0;
 	TOTALNoOfMissions = 0;
 	// AutoPromotedPercentage; Mountainous Missions only
-
 	NoOfWaitingMissions = 0;
 	NoOfInExecutionMission = 0;
 	NoOfCompletedMissions = 0;
@@ -152,8 +156,9 @@ inline void Mission::startofExcecutiondayo(int Day)
 	startofExcecutionday = Day;
 }
 
-inline bool Mission::finishmission()
+inline bool Mission::finishmission(int s)
 {
+	currentDay = s;
 	if (currentDay == CompletionDay)
 	{
 		state = 1;
@@ -176,5 +181,20 @@ inline void Mission::setIDofRoverExcecuting(int x)
 inline int Mission::getIDofRoverExcecuting()
 {
 	return IDofRoverExcecuting;
+}
+
+inline void Mission::setMDUR(int x)
+{
+	MDUR = x;
+}
+
+inline int Mission::getMDUR()
+{
+	return MDUR;
+}
+
+inline void Mission::setCompletionday(int x)
+{
+	CompletionDay = x;
 }
 

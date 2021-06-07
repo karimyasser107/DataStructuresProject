@@ -52,7 +52,7 @@ void formulationEvent::Execute(PriorityQueue<Mission>&EmergQ, LinkedQueue<Missio
 	FM->setFormulationDay(get_EventDay());
 	FM->setID(get_MissionID());
 	FM->setType(type);
-	FM->setMissinDuration(missionDuration);
+	FM->setMDUR(missionDuration);
 	FM->settargetLoction(targetLocation);
 	FM->setSignificance(significance);
 	if (type == 'E')

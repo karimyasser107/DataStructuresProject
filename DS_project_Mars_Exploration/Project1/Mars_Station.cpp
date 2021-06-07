@@ -57,6 +57,8 @@ void Mars_Station::Read_InputFile(LinkedList<Event*>&Event_List , LinkedQueue<Ro
 		rover1->setCheckupDuration(Check_up_Duration_Polar_Rov);
 		rover1->setType('P');
 		rover1->setID(Unique_ID_Rover);
+		rover1->setN_mission_before_checkup(N_mission_before_checkup);
+		rover1->setCurrentDay(Current__Day);
 		Available_Polar_Rovers.enqueue(*rover1);
 		rover1 = NULL;
 	}
@@ -70,6 +72,8 @@ void Mars_Station::Read_InputFile(LinkedList<Event*>&Event_List , LinkedQueue<Ro
 		rover1->setCheckupDuration(Check_up_Duration_Emerg_Rov);
 		rover1->setType('E');
 		rover1->setID(Unique_ID_Rover);
+		rover1->setN_mission_before_checkup(N_mission_before_checkup);
+		rover1->setCurrentDay(Current__Day);
 		Available_Emergency_Rovers.enqueue(*rover1);
 		rover1 = NULL;
 	}
@@ -91,10 +95,17 @@ void Mars_Station::checkinExcecRovers(int Day)
 	Nodo<Rovers>* RR = InExcecution_Rovers.getHead();
 	while (RR)
 	{
+		RR->getitem().setCurrentDay(Day);
+		RR = RR->getnext();
+	}
+	RR = InExcecution_Rovers.getHead();
+	while (RR)
+	{
 		if (RR->getitem().finishmission(Day))
 		{
 			if (RR->getitem().putinchecko())
 			{
+				RR->getitem().setstartcheckupday(Day);
 				RR->getitem().putinchecko();
 				RR->getitem().setstartcheckupday(Day);
 				Checkup_Rovers.InsertEnd(RR->getitem());
@@ -119,25 +130,24 @@ void Mars_Station::checkinExcecRovers(int Day)
 void Mars_Station::checkinMissinExcec(int Day)
 {
 	Nodo<Mission>* MM = InExcecution_Missions.getHead();
-	if (MM->getitem().finishmission())
+	while (MM)
 	{
-		if (MM->getitem().getType() == 'P')
+		if (MM->getitem().finishmission(Day))
 		{
+			if (MM->getitem().getType() == 'P')
+			{
 
-			Completed_Polar_Misssions.enqueue(MM->getitem());
+				Completed_Polar_Misssions.enqueue(MM->getitem());
+			}
+			else
+			{
+				Completed_Emergency_Missions.enqueue(MM->getitem());
+			}
+			MM->getitem().startofExcecutiondayo(0);
+			InExcecution_Missions.DeleteNode(MM);
 		}
-		else
-		{
-			Completed_Emergency_Missions.enqueue(MM->getitem());
-		}
-		MM->getitem().startofExcecutiondayo(0);
-		InExcecution_Missions.DeleteNode(MM);
-	}
-	else
-	{
 		MM = MM->getnext();
 	}
-	
 }
 
 bool Mars_Station::EventsList_is_Not_Empty()
@@ -181,6 +191,9 @@ void Mars_Station::scanEmergencyMissions(int Day)
 			Rovers ER;
 			Available_Emergency_Rovers.dequeue(ER);
 			ER.setstartofMissionday(Day);
+			int missionduration = int(2 * (EX.getTargetLocation() / ER.getspeed()) / 24) + EX.getMDUR();
+			EX.setCompletionday(missionduration + Day);
+			EX.setMissinDuration(missionduration);
 			InExcecution_Rovers.InsertEnd(ER);
 			waitingEmergency_Missions.dequeue(EX);
 			EX.setIDofRoverExcecuting(ER.getID());
@@ -191,6 +204,9 @@ void Mars_Station::scanEmergencyMissions(int Day)
 		{
 			Mission EX;
 			Rovers ER;
+			int missionduration = int(2 * (EX.getTargetLocation() / ER.getspeed()) / 24) + EX.getMDUR();
+			EX.setCompletionday(missionduration + Day);
+			EX.setMissinDuration(missionduration);
 			Available_Polar_Rovers.dequeue(ER);
 			InExcecution_Rovers.InsertEnd(ER);
 			waitingEmergency_Missions.dequeue(EX);
@@ -213,6 +229,9 @@ void Mars_Station::scanPolarMissions(int Day)
 		{
 			Mission EX;
 			Rovers ER;
+			int missionduration = int(2 * (EX.getTargetLocation() / ER.getspeed()) / 24) + EX.getMDUR();
+			EX.setCompletionday(missionduration + Day);
+			EX.setMissinDuration(missionduration);
 			Available_Polar_Rovers.dequeue(ER);
 			InExcecution_Rovers.InsertEnd(ER);
 			waitingPolar_Missions.dequeue(EX);
@@ -236,6 +255,11 @@ void Mars_Station::checkinCheckup(int Day)
 	Nodo<Rovers>* RR = Checkup_Rovers.getHead();
 	while (RR)
 	{
+		RR->getitem().setCurrentDay(Day);
+	}
+	RR = RR->getnext();
+	while (RR)
+	{
 		if (RR->getitem().getfromchecko(Day))
 		{
 			RR->getitem().getfromchecko(Day);
@@ -245,10 +269,7 @@ void Mars_Station::checkinCheckup(int Day)
 				Available_Emergency_Rovers.enqueue(RR->getitem());
 			Checkup_Rovers.DeleteNode(RR);
 		}
-		else
-		{
 			RR = RR->getnext();
-		}
 	}
 }
 //BONUS //Ahmed Fayez
@@ -315,6 +336,7 @@ int main()
 		//ahmed heikal CALL el fn assign rover w kol el fn el tania bta3t simulation hena
 		M1.checkinCheckup(M1.get_Current__Day());
 		M1.checkinExcecRovers(M1.get_Current__Day());
+		M1.checkinMissinExcec(M1.get_Current__Day());
 		M1.Loop_On_Events_In_Same_Day();
 		M1.scanEmergencyMissions(M1.get_Current__Day());
 		M1.scanPolarMissions(M1.get_Current__Day());
