@@ -31,7 +31,7 @@ private:
 	int NoOfCompletedMissions;
 
 	int NoOfAvailableRovers;
-
+	int startofExcecutionday;
 	int state;  //free:0 InExcecution:1  Checkup:-1
 
 public:
@@ -54,7 +54,7 @@ public:
 
 	void setSignificance(int Sig);
 	int getSignificance();
-
+	void startofExcecutiondayo(int Day);
 	bool finishmission();
 	int getPriority();
 	void setIDofRoverExcecuting(int x);
@@ -70,7 +70,7 @@ inline Mission::Mission()
 	AvgExecDays = 0;
 	EndDay = -1;
 	CompletionDay = FormulationDay + NoOfWaitingDays + NoOfExecutionDays;
-
+	startofExcecutionday = 0;
 	NoOfEmergencyMissions = 0;
 	NoOfPolarMissions = 0;
 	NoOfMountainousMissions = 0;
@@ -145,6 +145,11 @@ inline void Mission::setSignificance(int Sig)
 inline int Mission::getSignificance()
 {
 	return Significance;
+}
+
+inline void Mission::startofExcecutiondayo(int Day)
+{
+	startofExcecutionday = Day;
 }
 
 inline bool Mission::finishmission()

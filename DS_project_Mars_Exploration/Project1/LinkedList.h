@@ -13,7 +13,7 @@ private:
 public:
 
 	LinkedList();
-
+	/*LinkedList(const LinkedList& List);*/
 	~LinkedList();
 	Nodo<T>* getHead();
 	// Prints the linked list in the required format
@@ -28,7 +28,7 @@ public:
 	void ReadList();
 	bool isEmpty();
 	// you should NOT change this function
-	void InsertEnd( T data);
+	void InsertEnd(T data);
 
 	int getListSize();
 
@@ -39,8 +39,39 @@ public:
 template < typename T>
 inline LinkedList<T>::LinkedList()
 {
-	Head = nullptr;
+	Head = NULL;
 }
+//template<typename T>
+//inline LinkedList<T>::LinkedList(const LinkedList<T>& list)
+//{
+//	if (list.Head == nullptr)
+//	{
+//		Head = nullptr;
+//		return;
+//	}
+//
+//	Nodo<T>* temp = list.Head;
+//	Nodo<T>* newNode = nullptr;
+//
+//	while (temp != nullptr)
+//	{
+//		newNode = new Nodo<T>();
+//		newNode->setitem(temp->getitem());
+//		newNode->setnext(NULL);
+//
+//		if (Head == nullptr)
+//		{
+//			Head = newNode;
+//			/*tail = newNode;*/
+//		}
+//		//else
+//		//{
+//		//	/*tail->next = newNode;
+//		//	tail = newNode;*/
+//		//}
+//		temp = temp->getnext();
+//	}
+//}
 template < typename T>
 inline LinkedList<T>::~LinkedList()
 {
@@ -128,32 +159,35 @@ inline bool LinkedList<T>::isEmpty()
 
 // you should NOT change this function
 template < typename T>
-inline void LinkedList<T>::InsertEnd( T  data)
+inline void LinkedList<T>::InsertEnd( T data)
 {
 	Nodo<T>* R = new Nodo<T>(data);
 	if (!Head)
 	{
 		Head = R;
+		Head->setnext(NULL);
 		return;
 	}
 	Nodo<T>* p = Head;
 	while (p->getnext())
 		p = p->getnext();
 	p->setnext(R);
+	R->setnext(NULL);
 }
 
 template <typename T>
 int LinkedList<T> ::getListSize()
 {
-	Nodo<T>* ptr = Head;
 	int c = 0;
-	while (ptr != nullptr)
+	Nodo<T>* ptr = Head;
+	if (ptr== NULL)
+		return 0;
+	while (ptr)
 	{
-		c++;
 		ptr = ptr->getnext();
+		c++;
 	}
 	return c;
-	
 }
 
 template < typename T>

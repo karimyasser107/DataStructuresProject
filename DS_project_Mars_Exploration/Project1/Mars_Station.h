@@ -40,7 +40,7 @@ public:
 	void Save_OutputFile();
 
 	void checkinCheckup( int Day);
-	void checkinExcec(int Day);
+	void checkinExcecRovers(int Day);
 	void checkinMissinExcec(int Day);
 	bool EventsList_is_Not_Empty();
 	
@@ -54,8 +54,8 @@ public:
 	void increase_Current__Day();
 	int get_Current__Day();
 
-	void scanEmergencyMissions();
-	void scanPolarMissions();
+	void scanEmergencyMissions(int Day);
+	void scanPolarMissions(int Day);
 	int getModeNo();
 
 	//Output Modes

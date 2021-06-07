@@ -89,7 +89,7 @@ void UI_Class::Read_InputFile_UI(ifstream & inputFile, int* array_of_info_inputf
 }
 void UI_Class::Save_InputFile_UI(ofstream &outputFile)
 {
-	//Print Action Message 
+	//Print Action Message
 	string File_Name;
 	cout<<("Save Output File: Please enter File Name (example.txt)  ")<<endl;
 	cin >> File_Name;
@@ -114,7 +114,7 @@ int UI_Class::choosingInterfaceMode()
 	return choice;
 }
 
-void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Mission>WaitingPolar, PriorityQueue<Mission>WaitingEmergency, LinkedQueue<Rovers>Available_Polar_Rovers, LinkedQueue<Rovers>Available_Emergency_Rovers, LinkedList<Mission>InExcecution_Missions, LinkedList<Rovers>Checkup_Rovers, LinkedQueue<Mission>Completed_Polar_Missions, LinkedQueue<Mission>Completed_Emergency_Missions)
+void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Mission>WaitingPolar, PriorityQueue<Mission>WaitingEmergency, LinkedQueue<Rovers>Available_Polar_Rovers, LinkedQueue<Rovers>Available_Emergency_Rovers,  LinkedQueue<Mission>Completed_Polar_Missions, LinkedQueue<Mission>Completed_Emergency_Missions)
 {
 
 	//kareem el sheikh
@@ -139,31 +139,36 @@ void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Miss
 	}
 	cout << ")" << endl;
 	cout << "--------------------------------------------------------------------------------------------" << endl;
-	int inExecutionMission = InExcecution_Missions.getListSize();
-	cout << inExecutionMission<< " " << "In-Execution Missions/Rovers:" << "   ";
-	Nodo<Mission>* ptrME = InExcecution_Missions.getHead();
-	cout << "[" << "  ";
-	while (ptrME != nullptr)
-	{
-		if (ptrME->getitem().getType() == 'E')
-		{
-			cout << ptrME->getitem().getID() << "/" << ptrME->getitem().getIDofRoverExcecuting() << " ";
-			if (ptrME->getnext() != nullptr)
-				cout << ",";
-		}
-	}
-	cout << "]" << "      ";
-	Nodo<Mission>* ptrMP = InExcecution_Missions.getHead();
-	cout << "(" << "  ";
-	while (ptrMP != nullptr)
+	//int inExecutionMission = InExcecution_Missions.getListSize();
+	//cout << inExecutionMission<< " " << "In-Execution Missions/Rovers:" << "   ";
+	//Nodo<Mission>* ptrME = InExcecution_Missions.getHead();
+	//cout << "[" << "";
+	///*cout << endl << endl << endl << endl << endl << endl << endl;*/
+	//while (ptrME)
+	//{
+	//	if (ptrME->getitem().getType() == 'E')
+	//	{
+	//		cout << ptrME->getitem().getID() << "/" << ptrME->getitem().getIDofRoverExcecuting() << " ";
+	//		if (ptrME->getnext())
+	//			if (ptrME->getnext()->getitem().getType() == 'E')
+	//				   cout << ",";
+	//	}
+	//	ptrME = ptrME->getnext();
+	//}
+	//cout << "]" << "      ";
+	/*Nodo<Mission>* ptrMP = InExcecution_Missions.getHead();
+	cout << "(" << "";
+	while (ptrMP)
 	{
 		if (ptrMP->getitem().getType() == 'P')
 		{
 			cout << ptrMP->getitem().getID() << "/" << ptrMP->getitem().getIDofRoverExcecuting() << " ";
-			if (ptrMP->getnext() != nullptr)
-				cout << ",";
+			if (ptrMP->getnext())
+				if(ptrMP->getnext()->getitem().getType()=='P')
+				    cout << ",";
 		}
-	}
+		ptrMP = ptrMP->getnext();
+	}*/
 	cout << ")" << endl;
 	cout << "--------------------------------------------------------------------------------------------" << endl;
 	int totalAvailableRovers = Available_Emergency_Rovers.getQueueSize() + Available_Polar_Rovers.getQueueSize();
@@ -183,7 +188,7 @@ void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Miss
 	}
 	cout << ")" << endl;
 	cout<<"--------------------------------------------------------------------------------------------"<<endl;
-	int totalCheckupRovers = Checkup_Rovers.getListSize();
+	/*int totalCheckupRovers = Checkup_Rovers.getListSize();
 	cout << totalCheckupRovers<< " " << "In-Checkup Rovers:" << "      ";
 	Nodo<Rovers>* ptrRE = Checkup_Rovers.getHead();
 	cout << "[" << "  ";
@@ -207,7 +212,8 @@ void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Miss
 			if (ptrRP->getnext()!=nullptr)
 				cout << ",";
 		}
-	}
+		ptrRP=ptrRP->getnext();
+	}*/
 	cout << ')' << endl ;
 	cout << "--------------------------------------------------------------------------------------------" << endl;
 

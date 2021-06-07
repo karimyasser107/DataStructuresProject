@@ -30,6 +30,9 @@ public:
 	bool putinchecko();
 	bool getfromchecko(int x);
 	bool finishmission(int Day);
+	void setstartcheckupday(int day);
+	void incrementnumberofmissionsnow();
+	void setstartofMissionday(int Day);
 };
 
 
@@ -103,6 +106,7 @@ inline bool Rovers::putinchecko()
 	{
 		startofcheckupday = CurrentDay;
 		state = -1;
+		NoOfMissionsNow = 0;
 		return true;
 	}
 	else {
@@ -129,6 +133,22 @@ inline bool Rovers::finishmission(int Day)
 	{
 		NoOfMissionsNow++;
 		putinchecko();
+		return true;
 	}
 	return false;
+}
+
+inline void Rovers::setstartcheckupday(int day)
+{
+	startofcheckupday = day;
+}
+
+inline void Rovers::incrementnumberofmissionsnow()
+{
+	NoOfMissionsNow++;
+}
+
+inline void Rovers::setstartofMissionday(int Day)
+{
+	startofmissionday = Day;
 }
