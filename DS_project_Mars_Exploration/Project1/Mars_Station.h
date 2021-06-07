@@ -54,11 +54,14 @@ public:
 	void increase_Current__Day();
 	int get_Current__Day();
 
+
 	void scanEmergencyMissions(int Day);
 	void scanPolarMissions(int Day);
-	int getModeNo();
-
+	s
+	//BONUS Mission Fail
+	void Mission_Failure();
 	//Output Modes
+	int getModeNo();
 	void Program_Output_Modes();
 	bool The_Simulation_Is_Completed();
 
