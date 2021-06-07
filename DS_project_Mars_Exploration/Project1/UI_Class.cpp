@@ -12,6 +12,7 @@ UI_Class::UI_Class()
 
 void UI_Class::Read_InputFile_UI(ifstream & inputFile, int* array_of_info_inputfile, LinkedList<Event*>& Events_List)
 {
+	cout << "                    Mars Station" << endl << endl;
 	//Print Action Message 
 	string File_Name;
 	cout << ("Load an Exicting Input File: Please enter File Name (.txt)  ") << endl;
@@ -19,9 +20,19 @@ void UI_Class::Read_InputFile_UI(ifstream & inputFile, int* array_of_info_inputf
 	//open the file
 	inputFile.open(File_Name);
 	if (inputFile.is_open())
-		cout << "Load Input File was Done successfully " << endl;
+		cout << "Load Input File was Done successfully " << endl<<endl;
 	else
-		cout << ("Error: File was not Found") << endl;
+	{
+		do
+		{
+			cout << ("Error: File was not Found") << endl;
+			cout << "Please enter File Name (.txt)  " << endl;
+			cin >> File_Name;
+			inputFile.open(File_Name);
+		} while (!inputFile.is_open());
+		cout <<"Load Input File was Done successfully " << endl<<endl;
+	}
+		
 
 	//read first line (number of rovers)
 	//NOW first 2 elements of the array contains number of Rovers of each type : Polar , Emergency (respectively)
@@ -73,17 +84,60 @@ void UI_Class::Read_InputFile_UI(ifstream & inputFile, int* array_of_info_inputf
 	}
 
 	//close file
-	inputFile.close();
+	//inputFile.close();
 	return;
 }
-void UI_Class::Save_InputFile_UI(ofstream &outputFile)
+void UI_Class::Save_InputFile_UI(LinkedQueue<Rovers>Available_Polar_Rovers, LinkedQueue<Rovers>Available_Emergency_Rovers, LinkedQueue<Mission>Completed_Polar_Missions, LinkedQueue<Mission>Completed_Emergency_Missions)
 {
+	//Print Action Message
+	//Create new Output File
+	ofstream outputFile;
+
 	//Print Action Message 
 	string File_Name;
 	cout<<("Save Output File: Please enter File Name (example.txt)  ")<<endl;
 	cin >> File_Name;
+
 	//open the file
 	outputFile.open(File_Name, ios::out);
+
+	//Clculate total number of missions
+	int TOT_number_Emerg_Missions = Completed_Emergency_Missions.getQueueSize();
+	int TOT_number_Polar_Missions = Completed_Polar_Missions.getQueueSize();
+
+	//calculate total number of Rovers
+	int total_Available_Polar_Rovers = Available_Polar_Rovers.getQueueSize();
+	int total_Available_Emerg_Rovers = Available_Emergency_Rovers.getQueueSize();
+	int Total_No_Missions = TOT_number_Emerg_Missions + TOT_number_Polar_Missions;
+
+	//create a new list
+	while (true)
+	{
+
+	}
+	int arr[5] = { 18,1,7,5,6 };
+
+	outputFile << "CD   ID   FD   WD   ED " << endl;
+	
+
+	outputFile << arr[0] << "   ";
+	outputFile << arr[1] << "    ";
+	outputFile << arr[2] << "    ";
+	outputFile << arr[3] << "    ";
+	outputFile << arr[4] << endl;
+
+
+	outputFile << "………………………………………………" << endl << "………………………………………………" << endl << endl;
+	
+	
+
+	outputFile << "Missions: " << Total_No_Missions;
+	outputFile << "     [P: " << TOT_number_Polar_Missions << ", E: " << TOT_number_Emerg_Missions << "]" << endl;
+	outputFile << "Rovers: " << total_Available_Emerg_Rovers+total_Available_Polar_Rovers ;
+	outputFile << "      [P: " << total_Available_Polar_Rovers << ", E: " << total_Available_Emerg_Rovers << "]" << endl;
+	outputFile << "Avg Wait = " << 7 << ", Avg Exec =" << endl;
+	if (outputFile.is_open())
+		outputFile.close();
 	cout << ("Output File is generated and Saved succesfully ") << endl;
 	return;
 	
@@ -103,7 +157,7 @@ int UI_Class::choosingInterfaceMode()
 	return choice;
 }
 
-void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Mission>WaitingPolar, PriorityQueue<Mission>WaitingEmergency, LinkedQueue<Rovers>Available_Polar_Rovers, LinkedQueue<Rovers>Available_Emergency_Rovers, LinkedList<Mission>InExcecution_Missions, LinkedList<Rovers>Checkup_Rovers, LinkedQueue<Mission>Completed_Polar_Missions, LinkedQueue<Mission>Completed_Emergency_Missions)
+void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Mission>WaitingPolar, PriorityQueue<Mission>WaitingEmergency, LinkedQueue<Rovers>Available_Polar_Rovers, LinkedQueue<Rovers>Available_Emergency_Rovers,  LinkedQueue<Mission>Completed_Polar_Missions, LinkedQueue<Mission>Completed_Emergency_Missions)
 {
 
 	//kareem el sheikh
@@ -128,31 +182,36 @@ void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Miss
 	}
 	cout << ")" << endl;
 	cout << "--------------------------------------------------------------------------------------------" << endl;
-	int inExecutionMission = InExcecution_Missions.getListSize();
-	cout << inExecutionMission<< " " << "In-Execution Missions/Rovers:" << "   ";
-	Nodo<Mission>* ptrME = InExcecution_Missions.getHead();
-	cout << "[" << "  ";
-	while (ptrME != nullptr)
-	{
-		if (ptrME->getitem().getType() == 'E')
-		{
-			cout << ptrME->getitem().getID() << "/" << ptrME->getitem().getIDofRoverExcecuting() << " ";
-			if (ptrME->getnext() != nullptr)
-				cout << ",";
-		}
-	}
-	cout << "]" << "      ";
-	Nodo<Mission>* ptrMP = InExcecution_Missions.getHead();
-	cout << "(" << "  ";
-	while (ptrMP != nullptr)
+	//int inExecutionMission = InExcecution_Missions.getListSize();
+	//cout << inExecutionMission<< " " << "In-Execution Missions/Rovers:" << "   ";
+	//Nodo<Mission>* ptrME = InExcecution_Missions.getHead();
+	//cout << "[" << "";
+	///*cout << endl << endl << endl << endl << endl << endl << endl;*/
+	//while (ptrME)
+	//{
+	//	if (ptrME->getitem().getType() == 'E')
+	//	{
+	//		cout << ptrME->getitem().getID() << "/" << ptrME->getitem().getIDofRoverExcecuting() << " ";
+	//		if (ptrME->getnext())
+	//			if (ptrME->getnext()->getitem().getType() == 'E')
+	//				   cout << ",";
+	//	}
+	//	ptrME = ptrME->getnext();
+	//}
+	//cout << "]" << "      ";
+	/*Nodo<Mission>* ptrMP = InExcecution_Missions.getHead();
+	cout << "(" << "";
+	while (ptrMP)
 	{
 		if (ptrMP->getitem().getType() == 'P')
 		{
 			cout << ptrMP->getitem().getID() << "/" << ptrMP->getitem().getIDofRoverExcecuting() << " ";
-			if (ptrMP->getnext() != nullptr)
-				cout << ",";
+			if (ptrMP->getnext())
+				if(ptrMP->getnext()->getitem().getType()=='P')
+				    cout << ",";
 		}
-	}
+		ptrMP = ptrMP->getnext();
+	}*/
 	cout << ")" << endl;
 	cout << "--------------------------------------------------------------------------------------------" << endl;
 	int totalAvailableRovers = Available_Emergency_Rovers.getQueueSize() + Available_Polar_Rovers.getQueueSize();
@@ -172,7 +231,7 @@ void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Miss
 	}
 	cout << ")" << endl;
 	cout<<"--------------------------------------------------------------------------------------------"<<endl;
-	int totalCheckupRovers = Checkup_Rovers.getListSize();
+	/*int totalCheckupRovers = Checkup_Rovers.getListSize();
 	cout << totalCheckupRovers<< " " << "In-Checkup Rovers:" << "      ";
 	Nodo<Rovers>* ptrRE = Checkup_Rovers.getHead();
 	cout << "[" << "  ";
@@ -196,7 +255,8 @@ void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Miss
 			if (ptrRP->getnext()!=nullptr)
 				cout << ",";
 		}
-	}
+		ptrRP=ptrRP->getnext();
+	}*/
 	cout << ')' << endl ;
 	cout << "--------------------------------------------------------------------------------------------" << endl;
 

@@ -8,7 +8,6 @@
 #include"Mission.h"
 #include"Rovers.h"
 #include"Nodo.h"
-//#include<queue>
 
 class Mars_Station
 {
@@ -20,8 +19,8 @@ private:
 	LinkedQueue<Rovers>Available_Emergency_Rovers;
 	LinkedList<Rovers>InExcecution_Rovers;
 	LinkedList<Rovers>Checkup_Rovers;
-	LinkedQueue<Rovers>Free_Polar_Rovers;
-	LinkedQueue<Rovers>Free_Emergency_Rovers;
+	//LinkedQueue<Rovers>Free_Polar_Rovers;
+	//LinkedQueue<Rovers>Free_Emergency_Rovers;
 	LinkedList<Mission>InExcecution_Missions;
 	LinkedQueue<Mission>Completed_Polar_Missions;
 	LinkedQueue<Mission>Completed_Emergency_Missions;
@@ -35,32 +34,34 @@ private:
 	int ModeNo;
 public:
 	Mars_Station();
-	/*Read input file function*/
-	
-	//LinkedList<Event*>&EVEVE;
-	
-	//Mars_Station(LinkedList<Event>X);
-	//read input file function
-
+	//Read input file function
 	void Read_InputFile(LinkedList<Event*>& Event_List, LinkedQueue<Rovers>&Available_Emergency_Rovers, LinkedQueue<Rovers>&Available_Polar_Rovers);
-	/*Generate the Output File function*/
+	//Generate the Output File function
 	void Save_OutputFile();
+
 	void checkinCheckup( int Day);
-	void checkinExcec(int Day);
+	void checkinExcecRovers(int Day);
 	void checkinMissinExcec(int Day);
 	bool EventsList_is_Not_Empty();
 	
+	//Functions necessary to excute an Event
 	void Excute_Event_In_Certain_Day();//call Appropriate version of Excute according to the event type
 	void Loop_On_Events_In_Same_Day();//This function loops on the EventsList 
 	//and out all events that are in SAME DAY ONLY
 	//in order to be excuted
 
+	//functions on Current__Day
 	void increase_Current__Day();
 	int get_Current__Day();
-	void scanEmergencyMissions();
-	void scanPolarMissions();
-	int getModeNo();
 
+
+	void scanEmergencyMissions(int Day);
+	void scanPolarMissions(int Day);
+	s
+	//BONUS Mission Fail
+	void Mission_Failure();
+	//Output Modes
+	int getModeNo();
 	void Program_Output_Modes();
 	bool The_Simulation_Is_Completed();
 

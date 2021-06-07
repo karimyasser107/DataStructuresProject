@@ -13,26 +13,27 @@ private:
 public:
 
 	LinkedList();
-
+	/*LinkedList(const LinkedList& List);*/
 	~LinkedList();
 	Nodo<T>* getHead();
-	// Prints the linked list in the required format
-	// DON'T CHANGE ANYTHING INSIDE THIS FUNCTION *********
-	// BECAUSE THE AUTOMATIC JUDGE COMPARES FOR THIS FORMAT
 	void PrintList()	const;
 
 	void DeleteNode(Nodo<T>* Doll);
-	 void DeleteHead(T&);
+	void DeleteHead(T&);
 
-	// DO NOT CHANGE ANYTHING IN THIS FUNCTION *********
 	void ReadList();
 	bool isEmpty();
+
 	// you should NOT change this function
-	void InsertEnd( T data);
+	void InsertEnd(T data);
+
+
 
 	LinkedList(LinkedList<T>& Q);
 
 	int getListSize();
+
+	Nodo<T>* getNode_With_Pos(int);
 
 	void DeleteAll();
 };
@@ -41,8 +42,9 @@ public:
 template < typename T>
 inline LinkedList<T>::LinkedList()
 {
-	Head = nullptr;
+	Head = NULL;
 }
+<<<<<<< HEAD
 
 template<typename T>
 LinkedList<T>::LinkedList(LinkedList& Q) 
@@ -66,6 +68,39 @@ LinkedList<T>::LinkedList(LinkedList& Q)
 	}
 }
 
+=======
+//template<typename T>
+//inline LinkedList<T>::LinkedList(const LinkedList<T>& list)
+//{
+//	if (list.Head == nullptr)
+//	{
+//		Head = nullptr;
+//		return;
+//	}
+//
+//	Nodo<T>* temp = list.Head;
+//	Nodo<T>* newNode = nullptr;
+//
+//	while (temp != nullptr)
+//	{
+//		newNode = new Nodo<T>();
+//		newNode->setitem(temp->getitem());
+//		newNode->setnext(NULL);
+//
+//		if (Head == nullptr)
+//		{
+//			Head = newNode;
+//			/*tail = newNode;*/
+//		}
+//		//else
+//		//{
+//		//	/*tail->next = newNode;
+//		//	tail = newNode;*/
+//		//}
+//		temp = temp->getnext();
+//	}
+//}
+>>>>>>> 643db4cabbb6f9987f40872184b14b251920ca62
 template < typename T>
 inline LinkedList<T>::~LinkedList()
 {
@@ -76,9 +111,6 @@ inline Nodo<T>* LinkedList<T>::getHead()
 {
 	return Head;
 }
-// Prints the linked list in the required format
-// DON'T CHANGE ANYTHING INSIDE THIS FUNCTION *********
-// BECAUSE THE AUTOMATIC JUDGE COMPARES FOR THIS FORMAT
 
 template < typename T>
 inline void LinkedList<T>::PrintList()	const
@@ -129,7 +161,7 @@ template < typename T>
 	return;
 }
 
-// DO NOT CHANGE ANYTHING IN THIS FUNCTION *********
+
 template < typename T>
 inline void LinkedList<T>::ReadList()
 {
@@ -151,34 +183,54 @@ inline bool LinkedList<T>::isEmpty()
 		return false;
 }
 
-// you should NOT change this function
+
 template < typename T>
-inline void LinkedList<T>::InsertEnd( T  data)
+inline void LinkedList<T>::InsertEnd( T data)
 {
 	Nodo<T>* R = new Nodo<T>(data);
 	if (!Head)
 	{
 		Head = R;
+		Head->setnext(NULL);
 		return;
 	}
 	Nodo<T>* p = Head;
 	while (p->getnext())
 		p = p->getnext();
 	p->setnext(R);
+	R->setnext(NULL);
 }
 
 template <typename T>
 int LinkedList<T> ::getListSize()
 {
-	Nodo<T>* ptr = Head;
 	int c = 0;
-	while (ptr != nullptr)
+	Nodo<T>* ptr = Head;
+	if (ptr== NULL)
+		return 0;
+	while (ptr)
 	{
-		c++;
 		ptr = ptr->getnext();
+		c++;
 	}
 	return c;
-	
+}
+
+template <typename T>
+Nodo<T>* LinkedList<T> ::getNode_With_Pos(int pos)
+{
+	if (pos == 0)
+		return NULL;
+	int c = 0;
+	Nodo<T>* ptr = Head;
+	while (ptr)
+	{
+		c++;
+		if (c = pos)
+			return ptr;
+		ptr = ptr->getnext();
+	}
+	return NULL;
 }
 
 template < typename T>

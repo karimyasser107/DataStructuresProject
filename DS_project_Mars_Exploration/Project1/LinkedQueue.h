@@ -26,8 +26,8 @@ public:
 template<typename T>
 inline LinkedQueue<T>::LinkedQueue()
 {
-	backPtr = nullptr;
-	frontPtr = nullptr;
+	backPtr = NULL;
+	frontPtr = NULL;
 
 }
 
