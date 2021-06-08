@@ -51,7 +51,7 @@ public:
 	void scanEmergencyMissions(int Day);
 	void scanPolarMissions(int Day);
 	//BONUS Mission Fail
-	void Mission_Failure();
+	void Mission_Failure();		//Ahmed Fayez
 	//Output Modes
 	int getModeNo();
 	void Program_Output_Modes();

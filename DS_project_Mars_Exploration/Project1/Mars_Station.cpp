@@ -3,8 +3,8 @@
 #include <fstream>
 #include"Mission.h"
 #include"Rovers.h"
+#include <time.h>
 using namespace std;
-
 
 Mars_Station::Mars_Station()
 {
@@ -85,7 +85,7 @@ void Mars_Station::Read_InputFile(LinkedList<Event*>&Event_List , LinkedQueue<Ro
 void Mars_Station::Save_OutputFile()
 {
 	//call function save of class UI_Class
-	UI1.Save_InputFile_UI(Available_Polar_Rovers, Available_Emergency_Rovers, Completed_Polar_Misssions, Completed_Emergency_Missions);
+	UI1.Save_InputFile_UI(ModeNo,Available_Polar_Rovers, Available_Emergency_Rovers, Completed_Polar_Misssions, Completed_Emergency_Missions);
 }
 
 
@@ -256,8 +256,9 @@ void Mars_Station::checkinCheckup(int Day)
 	while (RR)
 	{
 		RR->getitem().setCurrentDay(Day);
+		RR = RR->getnext();
 	}
-	RR = RR->getnext();
+	
 	while (RR)
 	{
 		if (RR->getitem().getfromchecko(Day))
@@ -279,30 +280,81 @@ void Mars_Station::Mission_Failure()
 		return;
 
 	//generate a random position in list of Missions 
-	int N_missions=InExcecution_Missions.getListSize();
-	int Random_Pos_Mission=rand()% N_missions +1;
+	srand(time(NULL));
+	int N_missions = InExcecution_Missions.getListSize();
+	int Random_Pos_Mission = rand() % N_missions + 1;
 	Nodo<Mission>* Node_Mission_to_be_Failed = NULL;
 	Node_Mission_to_be_Failed = InExcecution_Missions.getNode_With_Pos(Random_Pos_Mission);
 	Mission Mission_to_be_Failed = Node_Mission_to_be_Failed->getitem();
 
 	//generate a random number to indicate the probability of a Mission to be Failed
 	int Failure_Prob = rand() % 100 + 1;
-	
-	if (Failure_Prob > 95 && Node_Mission_to_be_Failed->getitem().getTargetLocation()>500)
+
+	if (Failure_Prob > 90 && Node_Mission_to_be_Failed->getitem().getTargetLocation() > 500)
 	{
 		//3 things MUST happen to enter here (to make the Mission Failure Probability very low)
 		//1. failure prob must be > 95 %
 		//2. target location must be > 500 km
 		//3. Current day must be divisible by 3 
 
-		//Ahmed Fayez
 
+		//InExcecution_Missions.DeleteNode(Node_Mission_to_be_Failed);
+		int x = Mission_to_be_Failed.getIDofRoverExcecuting();
+		Rovers FRover;
+		Nodo<Rovers>* F_ptr = InExcecution_Rovers.getHead();
 
+		if (Mission_to_be_Failed.getType() == 'E')
+		{
+			Mission_to_be_Failed.setIDofRoverExcecuting(-1);
+			waitingEmergency_Missions.push(Mission_to_be_Failed, Mission_to_be_Failed.getSignificance());
+			
+			// set day to be ZERO
+			InExcecution_Missions.DeleteNode(Node_Mission_to_be_Failed);
+
+			/////////////////////
+
+			while (F_ptr)
+			{
+				if (F_ptr->getitem().getID() == x)
+				{
+					FRover = F_ptr->getitem();
+					Checkup_Rovers.InsertEnd(FRover);
+					InExcecution_Rovers.DeleteNode(F_ptr);
+					break;
+				}
+				F_ptr = F_ptr->getnext();
+			}
+		}
+
+		if (Mission_to_be_Failed.getType() == 'P')
+		{
+			Mission_to_be_Failed.setIDofRoverExcecuting(-1);
+			waitingPolar_Missions.enqueue(Mission_to_be_Failed);
+			
+			// set day to be ZERO
+			InExcecution_Missions.DeleteNode(Node_Mission_to_be_Failed);
+
+			/////////////////////
+
+			while (F_ptr)
+			{
+				if (F_ptr->getitem().getID() == x)
+				{
+					FRover = F_ptr->getitem();
+					Checkup_Rovers.InsertEnd(FRover);
+					InExcecution_Rovers.DeleteNode(F_ptr);
+					break;
+				}
+				F_ptr = F_ptr->getnext();
+			}
+		}
 	}
 	return;
 }
 
+
 //Output
+
 int Mars_Station::getModeNo()
 {
 	return ModeNo;
@@ -330,6 +382,8 @@ int main()
 {
 	//HERE we call functions ONLY
 	Mars_Station M1;
+	if (M1.getModeNo() == 3)
+
 	while (!(M1.The_Simulation_Is_Completed()))
 	{
 		M1.increase_Current__Day();
@@ -341,7 +395,6 @@ int main()
 		M1.scanEmergencyMissions(M1.get_Current__Day());
 		M1.scanPolarMissions(M1.get_Current__Day());
 		
-		
 	
 
 
@@ -352,10 +405,10 @@ int main()
 		//output daily
 		if(M1.getModeNo()!=3)
 			M1.Program_Output_Modes();       
-
+		
 
 			
 	}
-	///*M1.Save_OutputFile();*/
+	M1.Save_OutputFile();
 	return 0;
 }

@@ -64,7 +64,6 @@ void UI_Class::Read_InputFile_UI(ifstream & inputFile, int* array_of_info_inputf
 			formulationEvent **F_event=new formulationEvent*;
 			*F_event = new formulationEvent;
 			//insert the created formulationEvent to the Events_List (LinkedList)(insert at end)
-			//Events_List.
 			inputFile >> event_or_mission_type;//read the mission type
 			(*F_event)->set_Type(event_or_mission_type);
 			inputFile >> temp_input;//read event day
@@ -82,18 +81,15 @@ void UI_Class::Read_InputFile_UI(ifstream & inputFile, int* array_of_info_inputf
 			F_event = NULL;
 		}
 	}
-
-	//close file
-	//inputFile.close();
 	return;
 }
-void UI_Class::Save_InputFile_UI(LinkedQueue<Rovers>Available_Polar_Rovers, LinkedQueue<Rovers>Available_Emergency_Rovers, LinkedQueue<Mission>Completed_Polar_Missions, LinkedQueue<Mission>Completed_Emergency_Missions)
+
+void UI_Class::Save_InputFile_UI(int Outputmode,LinkedQueue<Rovers>Available_Polar_Rovers, LinkedQueue<Rovers>Available_Emergency_Rovers, LinkedQueue<Mission>Completed_Polar_Missions, LinkedQueue<Mission>Completed_Emergency_Missions)
 {
-	//Print Action Message
 	//Create new Output File
 	ofstream outputFile;
 
-	//Print Action Message 
+	//Print Action Message
 	string File_Name;
 	cout<<("Save Output File: Please enter File Name (example.txt)  ")<<endl;
 	cin >> File_Name;
@@ -110,37 +106,66 @@ void UI_Class::Save_InputFile_UI(LinkedQueue<Rovers>Available_Polar_Rovers, Link
 	int total_Available_Emerg_Rovers = Available_Emergency_Rovers.getQueueSize();
 	int Total_No_Missions = TOT_number_Emerg_Missions + TOT_number_Polar_Missions;
 
-	//create a new list
-	while (true)
+	//call function to calculate average waiting days and average execution days
+	float avg_wait_days;float avg_exec_days;
+	Calculate_Avg_wait_Exec(avg_wait_days, avg_exec_days, Total_No_Missions, Completed_Polar_Missions, Completed_Emergency_Missions);
+
+	//create a new sorted list of missions (sorted by CD-Completion Day)
+	PriorityQueue<Mission> Sorted_Missions;
+	Mission mission1;
+	while (Completed_Emergency_Missions.dequeue(mission1))
 	{
-
+		Sorted_Missions.push(mission1, (-1 * mission1.));//to be changed to getCD
 	}
-	int arr[5] = { 18,1,7,5,6 };
-
-	outputFile << "CD   ID   FD   WD   ED " << endl;
-	
-
-	outputFile << arr[0] << "   ";
-	outputFile << arr[1] << "    ";
-	outputFile << arr[2] << "    ";
-	outputFile << arr[3] << "    ";
-	outputFile << arr[4] << endl;
+	while (Completed_Polar_Missions.dequeue(mission1))
+	{
+		Sorted_Missions.push(mission1, (-1 * mission1.));//to be changed to getCD
+	}
 
 
+	//print in file all the required data
+	outputFile << "CD     ID     FD     WD     ED " << endl;
+	while (Sorted_Missions.dequeue(mission1))
+	{
+		outputFile << mission1.getFormulationDay() << "     ";
+		outputFile << mission1.getID() << "      ";
+		outputFile <<  << "      ";
+		outputFile <<  << "      ";
+		outputFile <<  << endl;
+	}
 	outputFile << "………………………………………………" << endl << "………………………………………………" << endl << endl;
-	
-	
-
 	outputFile << "Missions: " << Total_No_Missions;
 	outputFile << "     [P: " << TOT_number_Polar_Missions << ", E: " << TOT_number_Emerg_Missions << "]" << endl;
 	outputFile << "Rovers: " << total_Available_Emerg_Rovers+total_Available_Polar_Rovers ;
 	outputFile << "      [P: " << total_Available_Polar_Rovers << ", E: " << total_Available_Emerg_Rovers << "]" << endl;
-	outputFile << "Avg Wait = " << 7 << ", Avg Exec =" << endl;
+	outputFile << "Avg Wait = " << avg_wait_days << ", Avg Exec =" << avg_exec_days<<endl;
 	if (outputFile.is_open())
 		outputFile.close();
-	cout << ("Output File is generated and Saved succesfully ") << endl;
+	if (Outputmode == 3)
+		cout << "Silent Mode" << endl << "Simulation Starts..." << endl << "Simulation ends, Output file created" << endl;
+	else
+		cout << endl << "Output file is created successfully" << endl;
 	return;
-	
+}
+
+void UI_Class::Calculate_Avg_wait_Exec(float &avg_wait, float &avg_exec,int Total_No_Missions, LinkedQueue<Mission> Completed_Polar_Missions, LinkedQueue<Mission> Completed_Emergency_Missions)
+{
+	Mission mission1;
+	int sum_wait_days = 0;
+	int sum_exec_days = 0;
+	while (Completed_Emergency_Missions.dequeue(mission1))
+	{
+		sum_wait_days+=mission1.
+		sum_exec_days+=mission1.
+	}
+	while (Completed_Polar_Missions.dequeue(mission1))
+	{
+		sum_wait_days+=mission1.
+		sum_exec_days+=mission1.
+	}
+
+	avg_wait = sum_wait_days / Total_No_Missions;
+	avg_exec = sum_exec_days / Total_No_Missions;
 }
 
 int UI_Class::choosingInterfaceMode()
@@ -243,6 +268,7 @@ void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Miss
 			if (ptrRE->getnext()!=nullptr)
 				cout << ",";
 		}
+		ptrRE = ptrRE->getnext();
 	}
 	cout << ']' << "       ";
 	Nodo<Rovers>* ptrRP = Checkup_Rovers.getHead();
@@ -291,7 +317,6 @@ void UI_Class::Output_Screen_Console(int ModeNo,int current_Day,LinkedQueue<Miss
 		Sleep(2000);
 	}
 }
-
 
 UI_Class::~UI_Class()
 {
