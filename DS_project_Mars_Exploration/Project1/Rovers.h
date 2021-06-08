@@ -36,6 +36,7 @@ public:
 	void setCurrentDay(int y);
 	int getspeed();
 	void setN_mission_before_checkup(int x);
+	void setMissionDuration(int x);
 };
 
 
@@ -169,4 +170,9 @@ inline int Rovers::getspeed()
 inline void Rovers::setN_mission_before_checkup(int x)
 {
 	NoOfMissionsMax = x;
+}
+
+inline void Rovers::setMissionDuration(int x)
+{
+	misionDuration = x;
 }

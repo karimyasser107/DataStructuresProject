@@ -94,7 +94,18 @@ inline void LinkedList<T>::PrintList()	const
 template < typename T>
 inline void LinkedList<T>::DeleteNode(Nodo<T>* Doll)
 {
-	if (Doll == Head)
+	Nodo<T>* temp = Doll->getnext();
+	while (temp != NULL) {
+		if (temp->getnext() == NULL)
+		{
+			Doll->setnext( NULL);
+		}
+		Doll->setitem( temp->getitem());
+		Doll = Doll->getnext();
+		temp = temp->getnext();
+	}
+}
+	/*if (Doll == Head)
 	{
 		Head = Head->getnext();
 		Doll->setnext(0);
@@ -107,15 +118,15 @@ inline void LinkedList<T>::DeleteNode(Nodo<T>* Doll)
 		while (Toll->getnext() != Doll)
 			Toll = Toll->getnext();
 		if (Doll->getnext() == NULL)
-			Toll->setnext(0);
+			Toll->setnext(NULL);
 		else
 		{
 			Toll->setnext(Doll->getnext());
 		}
+		Doll->setnext(NULL);
 		delete(Doll);
 		Doll = Toll;
-	}
-}
+	}*/
 
 
 template < typename T>
