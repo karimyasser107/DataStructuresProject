@@ -132,6 +132,13 @@ void Mars_Station::checkinMissinExcec(int Day)
 	Nodo<Mission>* MM = InExcecution_Missions.getHead();
 	while (MM)
 	{
+		MM->getitem().setWD(Day - MM->getitem().getFD());
+		MM->getitem().setCurrentDay(Day);
+		MM = MM->getnext();
+	}
+	MM= InExcecution_Missions.getHead();
+	while (MM)
+	{
 		if (MM->getitem().finishmission(Day))
 		{
 			if (MM->getitem().getType() == 'P')
@@ -146,7 +153,10 @@ void Mars_Station::checkinMissinExcec(int Day)
 			MM->getitem().startofExcecutiondayo(0);
 			InExcecution_Missions.DeleteNode(MM);
 		}
-		MM = MM->getnext();
+		if (MM != NULL)
+			MM = MM->getnext();
+		else
+			return;
 	}
 }
 
@@ -183,19 +193,30 @@ void Mars_Station::Loop_On_Events_In_Same_Day()
 
 void Mars_Station::scanEmergencyMissions(int Day)
 {
+	Nodo<Mission>* YY = waitingEmergency_Missions.getFrontptr();
+	while (YY)
+	{
+		YY->getitem().setWD(Day - YY->getitem().getFD());
+		YY->getitem().setCurrentDay(Day);
+		YY = YY->getnext();
+	}
 	while (!waitingEmergency_Missions.isEmpty())
 	{
 		if (!Available_Emergency_Rovers.isEmpty())
 		{
 			Mission EX;
 			Rovers ER;
+			waitingEmergency_Missions.dequeue(EX);
 			Available_Emergency_Rovers.dequeue(ER);
 			ER.setstartofMissionday(Day);
 			int missionduration = int(2 * (EX.getTargetLocation() / ER.getspeed()) / 24) + EX.getMDUR();
-			EX.setCompletionday(missionduration + Day);
-			EX.setMissinDuration(missionduration);
+			EX.setED(missionduration);
+			ER.setMissionDuration(missionduration);
+			EX.setCD(missionduration + Day);
+			EX.setassigningday(Day);
+			EX.setWD(Day - EX.getFD());
+			EX.setED(missionduration);
 			InExcecution_Rovers.InsertEnd(ER);
-			waitingEmergency_Missions.dequeue(EX);
 			EX.setIDofRoverExcecuting(ER.getID());
 			EX.startofExcecutiondayo(Day);
 			InExcecution_Missions.InsertEnd(EX);
@@ -204,12 +225,15 @@ void Mars_Station::scanEmergencyMissions(int Day)
 		{
 			Mission EX;
 			Rovers ER;
-			int missionduration = int(2 * (EX.getTargetLocation() / ER.getspeed()) / 24) + EX.getMDUR();
-			EX.setCompletionday(missionduration + Day);
-			EX.setMissinDuration(missionduration);
 			Available_Polar_Rovers.dequeue(ER);
-			InExcecution_Rovers.InsertEnd(ER);
 			waitingEmergency_Missions.dequeue(EX);
+			int missionduration = int(2 * (EX.getTargetLocation() / ER.getspeed()) / 24) + EX.getMDUR();
+			EX.setCD(missionduration + Day);
+			EX.setED(missionduration);
+			ER.setMissionDuration(missionduration);
+			EX.setassigningday(Day);
+			EX.setWD(Day - EX.getFD());
+			InExcecution_Rovers.InsertEnd(ER);
 			EX.setIDofRoverExcecuting(ER.getID());
 			InExcecution_Missions.InsertEnd(EX);
 			EX.startofExcecutiondayo(Day);
@@ -223,18 +247,28 @@ void Mars_Station::scanEmergencyMissions(int Day)
 
 void Mars_Station::scanPolarMissions(int Day)
 {
+	Nodo<Mission>* YY = waitingPolar_Missions.getFrontptr();
+	while (YY)
+	{
+		YY->getitem().setWD(Day - YY->getitem().getFD());
+		YY->getitem().setCurrentDay(Day);
+		YY = YY->getnext();
+	}
 	while (!waitingPolar_Missions.isEmpty())
 	{
 		if (!Available_Polar_Rovers.isEmpty())
 		{
 			Mission EX;
 			Rovers ER;
-			int missionduration = int(2 * (EX.getTargetLocation() / ER.getspeed()) / 24) + EX.getMDUR();
-			EX.setCompletionday(missionduration + Day);
-			EX.setMissinDuration(missionduration);
-			Available_Polar_Rovers.dequeue(ER);
-			InExcecution_Rovers.InsertEnd(ER);
 			waitingPolar_Missions.dequeue(EX);
+			Available_Polar_Rovers.dequeue(ER);
+			int missionduration = int(2 * (EX.getTargetLocation() / ER.getspeed()) / 24) + EX.getMDUR();
+			EX.setCD(missionduration + Day);
+			EX.setED(missionduration);
+			EX.setassigningday(Day);
+			EX.setWD(Day - EX.getFD());
+			ER.setMissionDuration(missionduration);
+			InExcecution_Rovers.InsertEnd(ER);
 			EX.setIDofRoverExcecuting(ER.getID());
 			InExcecution_Missions.InsertEnd(EX);
 			EX.startofExcecutiondayo(Day);
@@ -258,7 +292,8 @@ void Mars_Station::checkinCheckup(int Day)
 		RR->getitem().setCurrentDay(Day);
 		RR = RR->getnext();
 	}
-	
+
+	RR = Checkup_Rovers.getHead();
 	while (RR)
 	{
 		if (RR->getitem().getfromchecko(Day))
@@ -381,6 +416,7 @@ Mars_Station::~Mars_Station()
 int main()
 {
 	//HERE we call functions ONLY
+
 	Mars_Station M1;
 	if (M1.getModeNo() == 3)
 
@@ -390,9 +426,13 @@ int main()
 		//ahmed heikal CALL el fn assign rover w kol el fn el tania bta3t simulation hena
 		M1.checkinCheckup(M1.get_Current__Day());
 		M1.checkinExcecRovers(M1.get_Current__Day());
+		
 		M1.checkinMissinExcec(M1.get_Current__Day());
+	
 		M1.Loop_On_Events_In_Same_Day();
+	
 		M1.scanEmergencyMissions(M1.get_Current__Day());
+	
 		M1.scanPolarMissions(M1.get_Current__Day());
 		
 	

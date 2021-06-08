@@ -18,6 +18,7 @@ public:
 	int getprioQueueSize();
 	void print() const;
 	void push(T& ito, int signo);
+	Nodo<T>* getFrontptr();
 	~PriorityQueue();
 
 	//copy constructor
@@ -139,6 +140,12 @@ inline void PriorityQueue<T>::push(T& ito, int signo)
 			}
 		}
 	}
+}
+
+template<typename T>
+inline Nodo<T>* PriorityQueue<T>::getFrontptr()
+{
+	return frontPtr;
 }
 
 template<typename T>

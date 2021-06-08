@@ -9,12 +9,12 @@ private:
 	int EndDay;
 	int NoOfWaitingDays;
 	int NoOfExecutionDays;
-	int CompletionDay;  // CompletionDay = FormulationDay + NoOfWaitingDays + NoOfExecutionDays
+	int CD;  // CompletionDay = FormulationDay + NoOfWaitingDays + NoOfExecutionDays
 	int TLOCR;
 	float AvgWaitDays;
 	float AvgExecDays;
 	int IDofRoverExcecuting;
-	int MissionDuration;
+	int ED;
 	int TargetLocation;
 	char Type;
 	int Significance;
@@ -30,7 +30,7 @@ private:
 	int NoOfWaitingMissions;
 	int NoOfInExecutionMission;
 	int NoOfCompletedMissions;
-
+	int assigningDay;
 	int NoOfAvailableRovers;
 	int startofExcecutionday;
 	int state;  //free:0 InExcecution:1  Checkup:-1
@@ -38,8 +38,8 @@ private:
 public:
 
 	Mission();
-	void setFormulationDay(int FD);
-	int getFormulationDay();
+	void setFD(int FD);
+	int getFD();
 
 	void setType(char c);
 	char getType();
@@ -47,12 +47,13 @@ public:
 	void setID(int id);
 	int getID();
 
-	void setMissinDuration(int d);
-	int getMissionDuration();
-
+	void setED(int d);
+	int getED();
+	void setWD(int x);
+	int getWD();
 	void settargetLoction(int Tloc);
 	int getTargetLocation();
-
+	void setCurrentDay(int d);
 	void setSignificance(int Sig);
 	int getSignificance();
 	void startofExcecutiondayo(int Day);
@@ -62,7 +63,10 @@ public:
 	int getIDofRoverExcecuting();
 	void setMDUR(int x);
 	int getMDUR();
-	void setCompletionday(int x);
+	void setCD(int x);
+	int getCD();
+	void setassigningday(int x);
+	int getassigningday();
 };
 
 inline Mission::Mission()
@@ -73,7 +77,7 @@ inline Mission::Mission()
 	AvgWaitDays = 0;
 	AvgExecDays = 0;
 	EndDay = -1;
-	CompletionDay = FormulationDay + NoOfWaitingDays + NoOfExecutionDays;
+	CD = FormulationDay + NoOfWaitingDays + NoOfExecutionDays;
 
 	startofExcecutionday = 0;
 	NoOfEmergencyMissions = 0;
@@ -89,12 +93,12 @@ inline Mission::Mission()
 	NoOfAvailableRovers = 0;
 }
 
-inline void Mission::setFormulationDay(int FD)
+inline void Mission::setFD(int FD)
 {
 	FormulationDay = FD;
 }
 
-inline int Mission::getFormulationDay()
+inline int Mission::getFD()
 {
 	return FormulationDay;
 }
@@ -121,14 +125,24 @@ inline int Mission::getID()
 	return ID;
 }
 
-inline void Mission::setMissinDuration(int d)
+inline void Mission::setED(int d)
 {
-	MissionDuration = d;
+	ED = d;
 }
 
-inline int Mission::getMissionDuration()
+inline int Mission::getED()
 {
-	return MissionDuration;
+	return ED;
+}
+
+inline void Mission::setWD(int x)
+{
+	NoOfWaitingDays = x;
+}
+
+inline int Mission::getWD()
+{
+	return NoOfWaitingDays;
 }
 
 inline void Mission::settargetLoction(int TLoc)
@@ -139,6 +153,11 @@ inline void Mission::settargetLoction(int TLoc)
 inline int Mission::getTargetLocation()
 {
 	return TargetLocation;
+}
+
+inline void Mission::setCurrentDay(int d)
+{
+	currentDay = d;
 }
 
 inline void Mission::setSignificance(int Sig)
@@ -159,7 +178,7 @@ inline void Mission::startofExcecutiondayo(int Day)
 inline bool Mission::finishmission(int s)
 {
 	currentDay = s;
-	if (currentDay == CompletionDay)
+	if (currentDay == CD)
 	{
 		state = 1;
 		return true;
@@ -170,7 +189,7 @@ inline bool Mission::finishmission(int s)
 
 inline int Mission::getPriority()
 {
-	return(int(2 * Significance + 0.5 * MissionDuration + 0.25 * FormulationDay + 0.125 * TLOCR));
+	return(int(2 * Significance + 0.5 * ED + 0.25 * FormulationDay + 0.125 * TargetLocation));
 }
 
 inline void Mission::setIDofRoverExcecuting(int x)
@@ -193,8 +212,23 @@ inline int Mission::getMDUR()
 	return MDUR;
 }
 
-inline void Mission::setCompletionday(int x)
+inline void Mission::setCD(int x)
 {
-	CompletionDay = x;
+	CD = x;
+}
+
+inline int Mission::getCD()
+{
+	return CD;
+}
+
+inline void Mission::setassigningday(int x)
+{
+	assigningDay = x;
+}
+
+inline int Mission::getassigningday()
+{
+	return assigningDay;
 }
 
