@@ -107,7 +107,7 @@ void UI_Class::Save_InputFile_UI(int Outputmode,LinkedQueue<Rovers>Available_Pol
 	int Total_No_Missions = TOT_number_Emerg_Missions + TOT_number_Polar_Missions;
 
 	//call function to calculate average waiting days and average execution days
-	float avg_wait_days;float avg_exec_days;
+	float avg_wait_days=0;float avg_exec_days=0;
 	Calculate_Avg_wait_Exec(avg_wait_days, avg_exec_days, Total_No_Missions, Completed_Polar_Missions, Completed_Emergency_Missions);
 
 	//create a new sorted list of missions (sorted by CD-Completion Day)
@@ -115,11 +115,11 @@ void UI_Class::Save_InputFile_UI(int Outputmode,LinkedQueue<Rovers>Available_Pol
 	Mission mission1;
 	while (Completed_Emergency_Missions.dequeue(mission1))
 	{
-		Sorted_Missions.push(mission1, (-1 * mission1.));//to be changed to getCD
+		Sorted_Missions.push(mission1, (-1 * mission1.getCD()));//to be changed to getCD
 	}
 	while (Completed_Polar_Missions.dequeue(mission1))
 	{
-		Sorted_Missions.push(mission1, (-1 * mission1.));//to be changed to getCD
+		Sorted_Missions.push(mission1, (-1 * mission1.getCD()));//to be changed to getCD
 	}
 
 
@@ -127,11 +127,11 @@ void UI_Class::Save_InputFile_UI(int Outputmode,LinkedQueue<Rovers>Available_Pol
 	outputFile << "CD     ID     FD     WD     ED " << endl;
 	while (Sorted_Missions.dequeue(mission1))
 	{
-		outputFile << mission1.getFormulationDay() << "     ";
+		outputFile << mission1.getCD() << "     ";
 		outputFile << mission1.getID() << "      ";
-		outputFile <<  << "      ";
-		outputFile <<  << "      ";
-		outputFile <<  << endl;
+		outputFile << mission1.getFD() << "      ";
+		outputFile << mission1.getWD() << "      ";
+		outputFile << mission1.getED() << endl;
 	}
 	outputFile << "………………………………………………" << endl << "………………………………………………" << endl << endl;
 	outputFile << "Missions: " << Total_No_Missions;
@@ -155,17 +155,19 @@ void UI_Class::Calculate_Avg_wait_Exec(float &avg_wait, float &avg_exec,int Tota
 	int sum_exec_days = 0;
 	while (Completed_Emergency_Missions.dequeue(mission1))
 	{
-		sum_wait_days+=mission1.
-		sum_exec_days+=mission1.
+		sum_wait_days += mission1.getWD();
+		sum_exec_days += mission1.getED();
 	}
 	while (Completed_Polar_Missions.dequeue(mission1))
 	{
-		sum_wait_days+=mission1.
-		sum_exec_days+=mission1.
+		sum_wait_days += mission1.getWD();
+		sum_exec_days+=mission1.getED();
 	}
-
+	if (Total_No_Missions == 0)
+		return;
 	avg_wait = sum_wait_days / Total_No_Missions;
 	avg_exec = sum_exec_days / Total_No_Missions;
+	return;
 }
 
 int UI_Class::choosingInterfaceMode()

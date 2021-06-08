@@ -47,7 +47,7 @@ void Mars_Station::Read_InputFile(LinkedList<Event*>&Event_List , LinkedQueue<Ro
 	int N_Events= array_of_info_inputfile[7];
 	
 	//unique ID for each Rover
-	int Unique_ID_Rover = 0;
+	int Unique_ID_Rover = 11899;
 	//fill the polar rover Queue
 	for(int i=0;i< N_Rovers[0];i++)
 	{
@@ -63,7 +63,6 @@ void Mars_Station::Read_InputFile(LinkedList<Event*>&Event_List , LinkedQueue<Ro
 		rover1 = NULL;
 	}
 	//fill the emergency rover Queue
-	Unique_ID_Rover = 0;
 	for (int i = 0;i < N_Rovers[1];i++)
 	{
 		Unique_ID_Rover++;
@@ -418,8 +417,6 @@ int main()
 	//HERE we call functions ONLY
 
 	Mars_Station M1;
-	if (M1.getModeNo() == 3)
-
 	while (!(M1.The_Simulation_Is_Completed()))
 	{
 		M1.increase_Current__Day();
